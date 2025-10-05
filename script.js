@@ -1,7 +1,6 @@
 // HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
-// 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
 document.addEventListener('DOMContentLoaded', () => {
-
+// 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
 // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
     const pages = {
         intro: document.getElementById('intro-page'),
@@ -17,64 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const choicesContainer = document.getElementById('choices-container');
     const resultText = document.getElementById('result-text');
     const guidelines = document.getElementById('guidelines');
+    const goToQuizBtn = document.getElementById('go-to-quiz-btn');
     
-    // 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가
-    // const goToQuizBtn = document.getElementById('go-to-quiz-btn');
+    // 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가예정
     // const downloadBtn = document.getElementById('download-btn');
     // const completeQuizBtn = document.getElementById('complete-quiz-btn');
 
-const ctx = document.getElementById('myRadarChart');
-    new Chart(ctx, {
-        type: 'radar',
-        data: {
-            labels: ['주체성', '비판력', '윤리성', '소통력', '데이터 통제력', '창의성'],
-            datasets: [{
-                label: '내 능력치',
-                data: [8, 7, 5, 9, 6, 8], // script.js의 점수 체계와 맞춘 예시
-                fill: true,
-                backgroundColor: 'rgba(255, 105, 180, 0.2)',
-                borderColor: 'rgba(255, 105, 180, 1)',
-                pointBackgroundColor: 'rgba(255, 105, 180, 1)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
-            }]
-        },
-      options: {
-    responsive: true,
-    maintainAspectRatio: false, // 컨테이너 비율에 맞춰 조절
-    layout: {
-        padding: 15 // ✨ 차트 전체의 내부 여백을 조절하여 중심에 더 가깝게 만듭니다. (값 조정 가능)
-    },
-    scales: {
-        r: {
-            angleLines: { color: '#ddd' },
-            grid: { color: '#eee' },
-            suggestedMin: 0,
-            suggestedMax: 10,
-            ticks: {
-                stepSize: 2,
-                backdropColor: 'transparent',
-                display: false // ✨ 숫자 눈금(0, 2, 4...)을 숨깁니다. (육각형 배경에 가려져 필요 없을 수 있습니다.)
-            },
-            pointLabels: {
-                color: '#333',
-                font: { size: 12 },
-                padding: 10, // ✨ 라벨(주체성, 비판력 등)과 차트 중심 사이의 여백을 조절합니다.
-                callback: function(value, index, values) {
-                    // ✨ 라벨이 너무 길면 줄 바꿈을 할 수 있습니다.
-                    if (value.includes(' ')) { // 공백이 있다면
-                        return value.split(' ');
-                    }
-                    return value;
-                }
-            }
-        }
-    },
-    plugins: {
-        legend: { display: false }
-    }
-}
+    // 인트로 페이지용 캔버스와 결과 페이지용 캔버스를 따로 분리
+    const introChartCanvas = document.getElementById('introRadarChart');
+    const resultChartCanvas = document.getElementById('resultRadarChart');
+    
+    let introChartInstance = null; // 인트로 차트 인스턴스
+    let resultChartInstance = null; // 결과 차트 인스턴스
+
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
@@ -126,35 +80,8 @@ const ctx = document.getElementById('myRadarChart');
                 { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } }
             ]
         }
-        // 영역별 6가지 질문
     ];
-
-    
-    let currentQuestionIndex = 0;
-    let userScores = { autonomy: 5, critical: 5, ethics: 5, comms: 5, data: 5, creative: 5 }; // 기본 점수 5점에서 시작
-
-    // --- 3. 핵심 기능 함수들 ---
-
-    // 질문을 화면에 표시하는 함수
-    function loadQuestion() {
-        // 현재 질문 데이터를 가져옴
-        const currentQuestion = questions[currentQuestionIndex];
-        questionText.innerText = currentQuestion.question;
-
-        // 이전 선택지들을 초기화
-        choicesContainer.innerHTML = '';
-
-        // 현재 질문의 선택지들을 버튼으로 만들어 화면에 추가
-        currentQuestion.choices.forEach(choice => {
-            const button = document.createElement('button');
-            button.innerText = choice.text;
-            button.onclick = () => selectChoice(choice.scores); // 버튼 클릭 시 selectChoice 함수 실행
-            choicesContainer.appendChild(button);
-        });
-    }
-    
-    // 결과 페이지에 표시될 문구 데이터
-    const resultsData = {
+   const resultsData = {
         autonomy: { title: "주체적 의사결정능력", text: "✨ 당신은 'AI 조종사' 타입! ✨ AI라는 최첨단 비행기를 자유자재로 조종하지만, 가끔은 자동항법에 너무 의존하는 경향이 있네요. 목적지를 잊지 않도록 직접 조종간을 잡는 연습이 필요해요!", guide: "<h3>🚀 주체성 UP 가이드</h3><p>1. AI에게 질문하기 전, '나는 무엇을 얻고 싶은가?' 스스로에게 먼저 질문해보세요.<br>2. AI의 답변은 참고자료일 뿐, 최종 결정은 나의 생각과 판단으로 내리는 연습을 하세요.</p>" },
         critical: { title: "비판적 사고력", text: "✨ 당신은 '순수한 믿음'의 소유자! ✨ AI가 하는 말이라면 팥으로 메주를 쑨다 해도 믿어줄 것 같은 당신! 하지만 AI는 가끔 거짓말도 한답니다. 🕵️‍♂️ 모든 정보를 의심하는 명탐정이 되어보세요!", guide: "<h3>🕵️‍♂️ 비판력 UP 가이드</h3><p>1. AI가 알려준 정보는 다른 뉴스나 책을 통해 꼭 교차 확인하세요.<br>2. AI에게 '그 정보의 출처가 어디야?'라고 되물어보는 습관을 들이세요.</p>" },
         ethics: { title: "윤리적 판단력", text: "✨ 당신은 '자유로운 영혼' 타입! ✨ 재미와 효율을 중시하는 당신! 하지만 당신의 AI 활용이 누군가에게 상처를 줄 수도 있어요. 행동하기 전 '이래도 괜찮을까?'하고 멈칫하는 브레이크를 장착해 보세요!", guide: "<h3>🚦 윤리성 UP 가이드</h3><p>1. AI로 만든 창작물을 사용하기 전, 저작권이나 초상권을 침해하지 않는지 확인하세요.<br>2. 다른 사람과 관련된 정보를 AI에 입력하기 전, 반드시 상대방의 동의를 구하세요.</p>" },
@@ -163,19 +90,119 @@ const ctx = document.getElementById('myRadarChart');
         creative: { title: "창의적 활용 능력", text: "✨ 당신은 'AI 비서' 활용 타입! ✨ AI를 편리한 비서처럼 활용하는 당신! 하지만 AI는 당신의 창의력을 폭발시켜 줄 최고의 파트너가 될 수도 있답니다. AI를 도구가 아닌, 함께 그림을 그리는 동료로 만들어보세요!", guide: "<h3>🎨 창의성 UP 가이드</h3><p>1. 전혀 다른 두 가지 키워드를 조합해서 AI에게 새로운 아이디어를 생성시켜 보세요.<br>2. AI의 결과물을 그대로 쓰지 말고, 그것을 바탕으로 나만의 아이디어를 더해 발전시켜 보세요.</p>" },
         perfect: { text: "✨ 당신은 이미 '육각형 인간'! ✨ AI를 다루는 당신의 능력은 완벽에 가깝군요! AI는 당신의 손에서 최고의 파트너가 될 것입니다. 지금처럼 꾸준히 AI를 현명하게 활용하며 멋진 미래를 만들어나가세요!", guide: "<h3>🏆 완벽 가이드</h3><p>축하합니다! 당신은 이미 모든 영역에서 뛰어난 능력을 보여주고 있습니다. 꾸준히 새로운 AI 기술에 관심을 가지고, 주변 친구들에게도 좋은 AI 활용법을 알려주는 리더가 되어주세요!</p>" }
     };
+
+    let currentQuestionIndex = 0;
+    let userScores = { autonomy: 5, critical: 5, ethics: 5, comms: 5, data: 5, creative: 5 };
+
+    // --- 3. 핵심 기능 함수들 ---          
+    // 질문을 화면에 표시하는 함수
+    function loadQuestion() {
+        // 현재 질문 데이터를 가져옴
+        const currentQuestion = questions[currentQuestionIndex];
+        questionText.innerText = currentQuestion.question;
+        // 이전 선택지들을 초기화
+        choicesContainer.innerHTML = '';
+        // 현재 질문의 선택지들을 버튼으로 만들어 화면에 추가
+        currentQuestion.choices.forEach(choice => {
+            const button = document.createElement('button');
+            button.innerText = choice.text;
+            button.onclick = () => selectChoice(choice.scores); // 버튼 클릭 시 selectChoice 함수 실행
+            choicesContainer.appendChild(button);
+        });
+    }    
     
    // 결과 페이지를 표시하는 새로운 함수
     function showResults() {
-        // 가장 낮은 점수의 영역 찾기
         let lowestScore = Infinity;
         let lowestKey = '';
-
         for (const key in userScores) {
             if (userScores[key] < lowestScore) {
                 lowestScore = userScores[key];
                 lowestKey = key;
             }
         }
+        if (lowestScore >= 7) {
+            resultText.innerHTML = resultsData.perfect.text;
+            guidelines.innerHTML = resultsData.perfect.guide;
+        } else {
+            resultText.innerHTML = resultsData[lowestKey].text;
+            guidelines.innerHTML = resultsData[lowestKey].guide;
+        }
+
+        // ✨ 설문 결과 점수로 결과 페이지 캔버스에 차트 그리기
+        drawChart(resultChartCanvas, Object.values(userScores), false);
+        
+        pages.survey.style.display = 'none';
+        pages.result.style.display = 'block';
+    }
+    // 차트를 그리는 함수
+    function drawChart(canvasElement, scoreData, isIntroChart = false) {
+        if (!canvasElement) return;
+
+        // 기존 차트 인스턴스가 있다면 파괴
+        let chartInstance = isIntroChart ? introChartInstance : resultChartInstance;
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+
+        const ctx = canvasElement.getContext('2d');
+        const chartConfig = {
+            type: 'radar',
+            data: {
+                labels: ['주체성', '비판력', '윤리성', '소통력', '데이터 통제력', '창의성'],
+                datasets: [{
+                    label: isIntroChart ? 'AI 활용 능력 (예시)' : '내 능력치', // 인트로 차트 라벨 변경
+                    data: scoreData,
+                    backgroundColor: 'rgba(255, 105, 180, 0.2)',
+                    borderColor: 'rgba(255, 105, 180, 1)',
+                    pointBackgroundColor: 'rgba(255, 105, 180, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: 15 // 차트 전체의 내부 여백을 조절
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#ddd' },
+                        grid: { color: '#eee' },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: {
+                            stepSize: 2,
+                            backdropColor: 'transparent',
+                            display: false // 숫자 눈금 숨김
+                        },
+                        pointLabels: {
+                            color: '#333',
+                            font: { size: 12 },
+                            padding: 10,
+                            callback: function(value, index, values) {
+                                if (value.includes(' ')) {
+                                    return value.split(' ');
+                                }
+                                return value;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        };
+
+        if (isIntroChart) {
+            introChartInstance = new Chart(ctx, chartConfig);
+        } else {
+            resultChartInstance = new Chart(ctx, chartConfig);
+        }
+    }
 
         // 모든 점수가 충분히 높으면 'perfect' 유형으로 처리 (예시: 최저점이 7점 이상)
         if (lowestScore >= 7) {
@@ -194,18 +221,15 @@ const ctx = document.getElementById('myRadarChart');
 
     // 선택지를 클릭했을 때 실행되는 함수 (수정됨)
     function selectChoice(scores) {
-        // ✨ 점수 업데이트 주석 해제!
         for (const key in scores) {
             userScores[key] += scores[key];
         }
         console.log("현재 점수:", userScores); // 점수 변경 실시간 확인용
-
         currentQuestionIndex++;
-
         if (currentQuestionIndex < questions.length) {
             loadQuestion();
         } else {
-            // ✨ 모든 질문이 끝나면 새로운 결과 표시 함수를 호출
+            // 모든 질문이 끝나면 새로운 결과 표시 함수를 호출
             showResults();
         }
     }
@@ -217,36 +241,25 @@ const ctx = document.getElementById('myRadarChart');
         pages.survey.style.display = 'block';
         loadQuestion();
     });
-
-
-
-
-
-
-
-
     
-    // ✨ [실전 퀴즈 풀러가기] 버튼은 아직 기능 연결 전이므로 전체 주석 처리
+    // [실전 퀴즈 풀러가기] 버튼은 아직 기능 연결 전이므로 전체 주석 처리
     /*
-    const goToQuizBtn = document.getElementById('go-to-quiz-btn');
     goToQuizBtn.addEventListener('click', () => {
         pages.result.style.display = 'none';
         pages.quiz.style.display = 'block';
     });
     */
 
-    // ✨ [퀴즈 완료] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
+    // [퀴즈 완료] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
     /*
-    const completeQuizBtn = document.getElementById('complete-quiz-btn');
     completeQuizBtn.addEventListener('click', () => {
         pages.quiz.style.display = 'none';
         pages.final.style.display = 'block';
     });
     */
 
-    // ✨ [나의 결과 다운로드하기] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
+    // [나의 결과 다운로드하기] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
     /*
-    const downloadBtn = document.getElementById('download-btn');
     downloadBtn.addEventListener('click', () => {
         alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
     });
