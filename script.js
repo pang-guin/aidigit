@@ -220,12 +220,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
-// --- 4. 이벤트 리스너 연결 ---
+
+    
+    
+    
+// --- 3. 페이지 로드 시 인트로 차트 그리기 ---
     const introExampleData = [7, 6, 8, 7, 5, 9];
     if (introChartCanvas) {
         drawChart(introChartCanvas, introExampleData, true);
     }
+});
 
+
+// --- 4. 이벤트 리스너 연결 ---
    // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
     startBtn.addEventListener('click', () => {
         pages.intro.style.display = 'none';
