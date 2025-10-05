@@ -1,4 +1,5 @@
-// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행되도록 하여 오류를 방지합니다.
+// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
+// 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
@@ -34,14 +35,38 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            question: "AI가 '3한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?",
+            question: "3. 친구의 얼굴 사진으로 재미있는 AI 밈(meme)을 만들고 싶을 때, 너는?",
             choices: [
-                { text: "\"오, 그렇구나!\" AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } },
-                { text: "\"뭔가 이상한데?\" 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } },
-                { text: "\"AI가 틀렸네\" 하고 무시하고 넘어간다.", scores: { critical: -1 } }
+                { text: "일단 만들고 본다. 재밌으면 장땡! 친구도 웃어넘길 것이다.", scores: { ethics: -2 } },
+                { text: "만들기 전에 친구에게 \"네 사진으로 AI 밈 만들어도 괜찮아?\"라고 먼저 물어본다.", scores: { ethics: 2 } },
+                { text: "혹시 친구가 기분 나쁠 수도 있으니, 연예인 사진으로 밈을 만든다.", scores: { ethics: 1 } }
             ]
         },
-        // 질문
+        {
+            question: "4. 코딩 숙제를 하다가 막혔을 때, AI에게 어떻게 질문할까?",
+            choices: [
+                { text: "그냥 \"코딩 오류 해결해 줘\"라고 막연하게 질문한다.", scores: { comms: -1 } },
+                { text: "내가 사용한 프로그래밍 언어, 발생한 오류 메시지, 내가 시도해 본 방법을 구체적으로 포함하여 질문한다.", scores: { comms: 2 } },
+                { text: "오류 코드를 그대로 복사해서 붙여넣기만 한다.", scores: { comms: 1 } }
+            ]
+        },
+        {
+            question: "5. 새로운 AI 앱에서 '주소록 및 사진 접근 권한'을 요구한다. 너의 행동은?",
+            choices: [
+                { text: "앱을 빨리 쓰고 싶으니까, 내용을 읽지 않고 '전체 동의'를 누른다.", scores: { data: -2 } },
+                { text: "이 앱의 기능을 사용하는 데 정말 주소록과 사진이 필요한지 꼼꼼히 따져보고, 불필요하다면 동의하지 않는다.", scores: { data: 2 } },
+                { text: "일단 동의하고, 나중에 찝찝하면 앱을 삭제한다.", scores: { data: -1 } }
+            ]
+        },
+        {
+            question: "6. 학교 축제 포스터를 만들어야 한다. AI를 어떻게 활용할까?",
+            choices: [
+                { text: "AI에게 \"학교 축제 포스터 만들어줘\"라고 입력하고, 나온 결과물 중 하나를 그대로 사용한다.", scores: { creative: -1 } },
+                { text: "AI에게 '레트로 스타일', '우주 컨셉' 등 다양한 키워드를 조합하며 포스터 아이디어 스케치를 여러 개 생성해 본 후, 가장 마음에 드는 아이디어를 바탕으로 내가 직접 디자인을 완성한다.", scores: { comms: 2, creative: 2 } },
+                { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } }
+            ]
+        }
+        // 질문 6가지
     ];
 
     let currentQuestionIndex = 0;
