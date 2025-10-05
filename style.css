@@ -1,6 +1,5 @@
 /* --- 기본 및 반응형 설정 --- */
 :root {
-    /* 폰트 크기를 변수로 관리하여 반응형 대응을 쉽게 함 */
     --font-size-h1: 2.2rem;
     --font-size-h2: 1.8rem;
     --font-size-p: 1rem;
@@ -11,7 +10,6 @@ body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    /* ✨ 1번 수정: 폰트 스타일을 하나로 통일 */
     font-family: 'Pretendard', sans-serif; 
 }
 
@@ -21,57 +19,43 @@ body {
 
 /* --- 페이지별 레이아웃 설정 --- */
 
-/* ✨ 2번 수정: 모든 페이지(인트로 제외)에 적용될 공통 스타일 */
-#survey-page, #result-page, #quiz-page, #final-page, .chart-container {
+/* ✨ 수정: .chart-container를 이 그룹에서 삭제했습니다. */
+#survey-page, #result-page, #quiz-page, #final-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 100%;
-    max-width: 600px; /* 데스크탑에서 너무 넓어지지 않도록 최대 너비 설정 */
+    max-width: 600px;
     padding: 2rem 1rem;
     box-sizing: border-box;
 }
 
-/* ✨ 2번 수정: 인트로 페이지는 화면 전체를 차지하는 특별한 스타일 유지 */
 #intro-page {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* 세로 중앙 정렬 */
+    justify-content: center;
     align-items: center;
-    height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
+    height: 100vh;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* --- 인트로 페이지 전용 스타일 --- */
-
-.intro-image-placeholder {
-    width: 180px;
-    height: 180px;
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    margin-bottom: 25px;
-    border: 3px solid #e0e0e0;
-    background-size: cover;
-    background-position: center;
-}
+/* --- (인트로 페이지 전용 스타일은 삭제해도 좋습니다. 차트가 그 역할을 대신합니다.) --- */
 
 /* --- 공통 요소 반응형 스타일 --- */
-/* ✨ 3번 수정: 폰트 스타일을 변수를 사용하는 반응형 코드로 통일 */
 h1 { font-size: var(--font-size-h1); margin-bottom: 15px; }
 h2 { font-size: var(--font-size-h2); }
 p { font-size: var(--font-size-p); line-height: 1.6; color: #555; }
 
-/* ✨ 4번 수정: 모든 버튼에 공통 스타일을 적용하고, #start-btn은 고유 스타일을 덮어쓰기 */
 button {
     padding: 0.8em 1.5em;
     font-size: var(--font-size-button);
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    background-color: #6c757d; /* 기본 버튼 색상 */
+    background-color: #6c757d;
     color: white;
     margin-top: 1rem;
     font-weight: bold;
@@ -81,7 +65,6 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* 시작하기 버튼은 특별한 디자인 유지 */
 #start-btn {
     padding: 15px 50px;
     font-size: 1.2rem;
@@ -92,13 +75,13 @@ button:hover {
     background-color: #0056b3;
 }
 
-
-/* --- 차트 및 퀴즈 페이지 스타일 (기존 반응형 코드 유지) --- */
-.chart-container { /* 차트는 intro 페이지가 아니므로 공통 스타일에서 제외 */
+/* --- 차트 스타일 --- */
+.chart-container {
     position: relative;
     width: 90vw;
     max-width: 400px;
     aspect-ratio: 1 / 1;
+    margin-bottom: 1rem; /* 차트와 텍스트 사이 간격 추가 */
 }
 
 svg, canvas {
@@ -117,12 +100,12 @@ svg { z-index: 0; }
 .sparkle { fill: white; opacity: 0; animation: sparkle 2s infinite; }
 @keyframes sparkle { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
+/* --- 퀴즈 페이지 스타일 --- */
 .quiz-container { display: flex; justify-content: space-around; width: 100%; gap: 1rem; }
 .concept-item, .scenario-item { border: 1px dashed #ccc; padding: 1rem; margin-bottom: 0.5rem; background: white; }
 .scenario-item { cursor: grab; border-style: solid; }
 
-
-/* --- 미디어 쿼리: 모바일 화면 대응 --- */
+/* --- 미디어 쿼리 --- */
 @media (max-width: 768px) {
     :root {
         --font-size-h1: 1.8rem;
