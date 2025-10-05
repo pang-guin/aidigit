@@ -1,4 +1,8 @@
- // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
+// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
+// 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
+document.addEventListener('DOMContentLoaded', () => {
+
+// --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
     const pages = {
         intro: document.getElementById('intro-page'),
         survey: document.getElementById('survey-page'),
@@ -7,25 +11,23 @@
         final: document.getElementById('final-page')
     };
 
-    // ✨ 오류 수정: 존재하는 버튼만 먼저 찾도록 수정
+    // 존재하는 버튼만 먼저 찾도록 수정
     const startBtn = document.getElementById('start-btn');
     const questionText = document.getElementById('question-text');
     const choicesContainer = document.getElementById('choices-container');
     const resultText = document.getElementById('result-text');
     const guidelines = document.getElementById('guidelines');
     
-    // ✨ 오류 수정: 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가해야 합니다.
+    // 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가
     // const goToQuizBtn = document.getElementById('go-to-quiz-btn');
     // const downloadBtn = document.getElementById('download-btn');
     // const completeQuizBtn = document.getElementById('complete-quiz-btn');
-
-
 
 const ctx = document.getElementById('myRadarChart');
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['주체성', '비판력', '윤리성', '소통력', '데이터', '창의성'],
+            labels: ['주체성', '비판력', '윤리성', '소통력', '데이터 통제력', '창의성'],
             datasets: [{
                 label: '내 능력치',
                 data: [8, 7, 5, 9, 6, 8], // script.js의 점수 체계와 맞춘 예시
@@ -74,17 +76,12 @@ const ctx = document.getElementById('myRadarChart');
     }
 }
 
-// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
-// 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
-document.addEventListener('DOMContentLoaded', () => {
-
-
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
         {
             question: "1. 조별 과제로 보고서를 써야 할 때, 너의 선택은?",
             choices: [
-                { text: "일단 AI에게 \"OO 보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } },
+                { text: "일단 AI에게 \"보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } },
                 { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } },
                 { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } }
             ]
