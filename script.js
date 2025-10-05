@@ -192,6 +192,5 @@ document.addEventListener('DOMContentLoaded', () => {
         //     link.download = 'My_AI_Hexagon.png';
         //     link.click();
        // }); 
-});
 
 });
