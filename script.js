@@ -11,10 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
         final: document.getElementById('final-page')
     };
 
+    // ✨ 오류 수정: 존재하는 버튼만 먼저 찾도록 수정
     const startBtn = document.getElementById('start-btn');
     const questionText = document.getElementById('question-text');
     const choicesContainer = document.getElementById('choices-container');
-    // (추후 다른 버튼들도 여기에 추가)
+    const resultText = document.getElementById('result-text');
+    const guidelines = document.getElementById('guidelines');
+    
+    // ✨ 오류 수정: 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가해야 합니다.
+    // const goToQuizBtn = document.getElementById('go-to-quiz-btn');
+    // const downloadBtn = document.getElementById('download-btn');
+    // const completeQuizBtn = document.getElementById('complete-quiz-btn');
+
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
@@ -159,9 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ✨ [실전 퀴즈 풀러가기] 버튼 클릭 이벤트 (결과 -> 퀴즈)
-    goToQuizBtn.addEventListener('click', () => {
-        pages.result.style.display = 'none';
-        pages.quiz.style.display = 'block';
+  //  goToQuizBtn.addEventListener('click', () => {
+  //      pages.result.style.display = 'none';
+  //      pages.quiz.style.display = 'block';
     });
 
     // ✨ (예시) 퀴즈 페이지의 '완료' 버튼 클릭 이벤트 (퀴즈 -> 최종)
@@ -174,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     */
 
     // ✨ [나의 결과 다운로드하기] 버튼 클릭 이벤트
-    downloadBtn.addEventListener('click', () => {
+   // downloadBtn.addEventListener('click', () => {
         alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
         // 실제 구현 예시:
         // html2canvas(pages.result).then(canvas => {
@@ -183,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //     link.href = image;
         //     link.download = 'My_AI_Hexagon.png';
         //     link.click();
-        // });
-    });
+       // }); 
+});
 
 });
