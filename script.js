@@ -235,6 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 // --- 4. 이벤트 리스너 연결 ---
+    const introExampleData = [7, 6, 8, 7, 5, 9];
+    if (introChartCanvas) {
+        drawChart(introChartCanvas, introExampleData, true);
+    }
+
    // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
     startBtn.addEventListener('click', () => {
         pages.intro.style.display = 'none';
