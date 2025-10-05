@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
         {
-            question: "조별 과제로 보고서를 써야 할 때, 너의 선택은?",
+            question: "1. 조별 과제로 보고서를 써야 할 때, 너의 선택은?",
             choices: [
                 { text: "일단 AI에게 \"OO 보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } },
                 { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } },
@@ -26,14 +26,22 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            question: "AI가 '한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?",
+            question: "2. AI가 '한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?",
             choices: [
                 { text: "\"오, 그렇구나!\" AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } },
                 { text: "\"뭔가 이상한데?\" 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } },
                 { text: "\"AI가 틀렸네\" 하고 무시하고 넘어간다.", scores: { critical: -1 } }
             ]
         },
-        // 여기에 나머지 4개 영역 질문을 추가하세요.
+        {
+            question: "AI가 '3한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?",
+            choices: [
+                { text: "\"오, 그렇구나!\" AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } },
+                { text: "\"뭔가 이상한데?\" 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } },
+                { text: "\"AI가 틀렸네\" 하고 무시하고 넘어간다.", scores: { critical: -1 } }
+            ]
+        },
+        // 질문
     ];
 
     let currentQuestionIndex = 0;
