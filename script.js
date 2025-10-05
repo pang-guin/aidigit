@@ -158,38 +158,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 4. 이벤트 리스너 연결 ---
-   // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
-    startBtn.addEventListener('click', () => {
-        pages.intro.style.display = 'none';
-        pages.survey.style.display = 'block';
-        loadQuestion();
-    });
+// --- 4. 이벤트 리스너 연결 ---
+   // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
+    startBtn.addEventListener('click', () => {
+        pages.intro.style.display = 'none';
+        pages.survey.style.display = 'block';
+        loadQuestion();
+    });
 
-    // ✨ [실전 퀴즈 풀러가기] 버튼 클릭 이벤트 (결과 -> 퀴즈)
-  //  goToQuizBtn.addEventListener('click', () => {
-  //      pages.result.style.display = 'none';
-  //      pages.quiz.style.display = 'block';
-    });
+    // ✨ [실전 퀴즈 풀러가기] 버튼은 아직 기능 연결 전이므로 전체 주석 처리
+    /*
+    const goToQuizBtn = document.getElementById('go-to-quiz-btn');
+    goToQuizBtn.addEventListener('click', () => {
+        pages.result.style.display = 'none';
+        pages.quiz.style.display = 'block';
+    });
+    */
 
-    // ✨ (예시) 퀴즈 페이지의 '완료' 버튼 클릭 이벤트 (퀴즈 -> 최종)
-    // 이 기능을 사용하려면 HTML의 quiz-page 안에 <button id="complete-quiz-btn">퀴즈 완료</button>를 추가해야 합니다.
-    /*
-    completeQuizBtn.addEventListener('click', () => {
-        pages.quiz.style.display = 'none';
-        pages.final.style.display = 'block';
-    });
-    */
+    // ✨ [퀴즈 완료] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
+    /*
+    const completeQuizBtn = document.getElementById('complete-quiz-btn');
+    completeQuizBtn.addEventListener('click', () => {
+        pages.quiz.style.display = 'none';
+        pages.final.style.display = 'block';
+    });
+    */
 
-    // ✨ [나의 결과 다운로드하기] 버튼 클릭 이벤트
-   // downloadBtn.addEventListener('click', () => {
-        alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
-        // 실제 구현 예시:
-        // html2canvas(pages.result).then(canvas => {
-        //     const image = canvas.toDataURL('image/png');
-        //     const link = document.createElement('a');
-        //     link.href = image;
-        //     link.download = 'My_AI_Hexagon.png';
-        //     link.click();
-       // }); 
+    // ✨ [나의 결과 다운로드하기] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
+    /*
+    const downloadBtn = document.getElementById('download-btn');
+    downloadBtn.addEventListener('click', () => {
+        alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
+    });
+    */
+
 });
