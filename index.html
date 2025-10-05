@@ -2,32 +2,18 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- 반응형 모바일 버전을 위한 뷰포트 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ 나의 AI 육각형 테스트 ✨</title>
-
-     <link rel="stylesheet" href="style.css">
-    <!-- 차트용 외부 자바스크립트 -->
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- 
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    
-<!-- 인트로 페이지 -->
-<div id="intro-page">
-     <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
+
+    <div id="intro-page">
         <div class="chart-container">
             <svg viewBox="0 0 200 200">
-                <defs>
-                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" />
-                        <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
-                <circle class="sparkle" cx="160" cy="40" r="5"/>
-                <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
-                <circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+                <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
+                <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/><circle class="sparkle" cx="160" cy="40" r="5"/><circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/><circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
             </svg>
             <canvas id="introRadarChart"></canvas>
         </div>
@@ -37,68 +23,49 @@
            간단한 테스트를 통해 나의 AI 활용 스타일을 알아보고,<br>
            최강의 '육각형 인간'으로 레벨 업 해보자!</p>
         <button id="start-btn">시작하기</button>
-</div>       
-
-<div id="survey-page" style="display:none;">
-  <h2 id="question-text"></h2>
-  <div id="choices-container"></div>
-</div>
-
-    
-<div id="result-page" style="display:none;">
-    <h2>나의 AI 능력치 분석 결과</h2>
-    <div class="chart-container">
-        <svg viewBox="0 0 200 200">
-            <defs>
-                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" />
-                    <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
-            <circle class="sparkle" cx="160" cy="40" r="5"/>
-            <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
-            <circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
-        </svg>
-        <canvas id="resultRadarChart"></canvas> </div>
-    <div id="result-text"></div>
-    <div id="guidelines"></div>
-    <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
-</div>
-   
-
-<div id="quiz-page" style="display:none;">
-    <h2>실전! 능력 강화 퀴즈</h2>
-    <p>오른쪽의 상황 카드를 왼쪽의 알맞은 능력 카드 위로 드래그해서 옮겨보세요!</p>
-    <div class="quiz-container">
-        <div id="concepts">
-            <div class="concept-item" data-match="autonomy">주체적 의사결정능력</div>
-            <div class="concept-item" data-match="critical">비판적 사고력</div>
-            <div class="concept-item" data-match="ethics">윤리적 판단력</div>
-            <div class="concept-item" data-match="comms">AI 소통능력</div>
-            <div class="concept-item" data-match="data">데이터 통제력</div>
-            <div class="concept-item" data-match="creative">창의적 활용 능력</div>
-        </div>
-
-        <div id="scenarios">
-            <div class="scenario-item" draggable="true" data-answer="ethics">친구의 사진을 AI 필터에 넣기 전에 먼저 허락을 구했다.</div>
-            <div class="scenario-item" draggable="true" data-answer="comms">원하는 답변을 얻기 위해 AI에게 구체적인 역할과 조건을 설정해주며 질문했다.</div>
-            <div class="scenario-item" draggable="true" data-answer="data">회원가입 시 개인정보 제공 동의 항목을 꼼꼼히 읽고 불필요한 정보는 제공하지 않았다.</div>
-            <div class="scenario-item" draggable="true" data-answer="critical">AI가 생성한 뉴스 기사가 진짜인지 확인하기 위해 다른 언론사 기사와 교차 확인했다.</div>
-            <div class="scenario-item" draggable="true" data-answer="creative">AI가 만든 음악 코드에 나만의 멜로디와 가사를 더해 새로운 곡을 만들었다.</div>
-            <div class="scenario-item" draggable="true" data-answer="autonomy">AI에게 추천받은 공부 계획을 그대로 따르지 않고, 나의 상황에 맞게 수정하여 최종 계획을 세웠다.</div>
-        </div>
     </div>
-    <button id="complete-quiz-btn">퀴즈 완료</button>
-</div>
 
-<div id="final-page" style="display:none;">
-    <div id="sparkling-hexagon">✨</div> 
+    <div id="survey-page" style="display:none;">
+        <h2 id="question-text"></h2>
+        <div id="choices-container"></div>
+    </div>
+
+    <div id="result-page" style="display:none;">
+        <h2>나의 AI 능력치 분석 결과</h2>
+        <div class="chart-container">
+            <svg viewBox="0 0 200 200">
+                <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
+                <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/><circle class="sparkle" cx="160" cy="40" r="5"/><circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/><circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+            </svg>
+            <canvas id="resultRadarChart"></canvas>
+        </div>
+        <div id="result-text"></div>
+        <div id="guidelines"></div>
+        <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
+    </div>
+
+    <div id="quiz-page" style="display:none;">
+        <h2>실전! 능력 강화 퀴즈</h2>
+        <p>오른쪽의 상황 카드를 왼쪽의 알맞은 능력 카드 위로 드래그해서 옮겨보세요!</p>
+        <div class="quiz-container">
+            <div id="concepts">
+                <div class="concept-item" data-match="autonomy">주체적 의사결정능력</div><div class="concept-item" data-match="critical">비판적 사고력</div><div class="concept-item" data-match="ethics">윤리적 판단력</div><div class="concept-item" data-match="comms">AI 소통능력</div><div class="concept-item" data-match="data">데이터 통제력</div><div class="concept-item" data-match="creative">창의적 활용 능력</div>
+            </div>
+            <div id="scenarios">
+                <div class="scenario-item" draggable="true" data-answer="ethics">친구의 사진을 AI 필터에 넣기 전에 먼저 허락을 구했다.</div><div class="scenario-item" draggable="true" data-answer="comms">원하는 답변을 얻기 위해 AI에게 구체적인 역할과 조건을 설정해주며 질문했다.</div><div class="scenario-item" draggable="true" data-answer="data">회원가입 시 개인정보 제공 동의 항목을 꼼꼼히 읽고 불필요한 정보는 제공하지 않았다.</div><div class="scenario-item" draggable="true" data-answer="critical">AI가 생성한 뉴스 기사가 진짜인지 확인하기 위해 다른 언론사 기사와 교차 확인했다.</div><div class="scenario-item" draggable="true" data-answer="creative">AI가 만든 음악 코드에 나만의 멜로디와 가사를 더해 새로운 곡을 만들었다.</div><div class="scenario-item" draggable="true" data-answer="autonomy">AI에게 추천받은 공부 계획을 그대로 따르지 않고, 나의 상황에 맞게 수정하여 최종 계획을 세웠다.</div>
+            </div>
+        </div>
+        <button id="complete-quiz-btn">퀴즈 완료</button>
+    </div>
+
+    <div id="final-page" style="display:none;">
+        <div id="sparkling-hexagon">✨</div>
         <h2>🎉축하합니다!🎉</h2>
         <p>당신은 'AI 마스터 육각형 인간'으로 거듭났습니다!</p>
-      <button id="download-btn">나의 결과 다운로드하기</button>
-</div>
-
-<script src="script.js"></script> 
+        <button id="download-btn">나의 결과 다운로드하기</button>
+    </div>
+    
+    <script src="script.js"></script>
+    
 </body>
 </html>
