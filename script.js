@@ -229,8 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (introChartCanvas) {
         drawChart(introChartCanvas, introExampleData, true);
     }
-});
-
 
 // --- 4. 이벤트 리스너 연결 ---
    // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
