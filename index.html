@@ -12,22 +12,19 @@
  
 </head>
 <body>
-<!-- 메인페이지 -->
+    
+<!-- 인트로 페이지 -->
 <div id="intro-page">
     <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
-    <!-- 메인용 이미지 공간 
-    <div class="intro-image-placeholder"></div> 
-     -->
-    <div class="intro-text-container">
+    <!-- 임시 메인용 이미지 공간 <div class="intro-image-placeholder"></div> -->
+    <div class="chart-container intro-chart-container">
       <h1>AI 시대, 너의 능력치는?</h1>
       <p>우리는 모두 AI와 함께 살아가는 시대의 탐험가야. 🧭<br>
         간단한 테스트를 통해 나의 AI 활용 스타일을 알아보고,<br>
         최강의 '육각형 인간'으로 레벨 업 해보자!</p>
       <button id="start-btn">시작하기</button>
-</div>
-
+    </div>
     <div class="chart-container">
-    <!-- 영롱한 육각형 배경 -->
     <svg viewBox="0 0 200 200">
       <defs>
         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -35,10 +32,8 @@
           <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
         </linearGradient>
       </defs>
-
       <!-- 육각형 -->
       <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
-
       <!-- 반짝이는 점 -->
       <circle class="sparkle" cx="160" cy="40" r="5"/>
       <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
@@ -46,9 +41,10 @@
     </svg>
 
     <!-- 레이더 차트 -->
-    <canvas id="myRadarChart"></canvas>
-  </div>
-
+    <!--<canvas id="myRadarChart"></canvas> -->
+    <canvas id="introRadarChart"></canvas>
+    </div>
+</div>        
     
 
 <div id="survey-page" style="display:none;">
@@ -59,13 +55,30 @@
   <div id="choices-container"></div>
 </div>
 
+
+    
 <div id="result-page" style="display:none;">
-  <h2>나의 AI 능력치 분석 결과</h2>
-  <canvas id="final-hexagon-chart"></canvas>
-  <div id="result-text"></div>
-  <div id="guidelines"></div>
-  <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
+    <h2>나의 AI 능력치 분석 결과</h2>
+    <div class="chart-container result-chart-container">
+        <svg viewBox="0 0 200 200">
+            <defs>
+                <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" />
+                    <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
+            <circle class="sparkle" cx="160" cy="40" r="5"/>
+            <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
+            <circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+        </svg>
+        <canvas id="resultRadarChart"></canvas> </div>
+    <div id="result-text"></div>
+    <div id="guidelines"></div>
+    <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
 </div>
+
+    
 
 <div id="quiz-page" style="display:none;">
     <h2>실전! 능력 강화 퀴즈</h2>
