@@ -15,51 +15,39 @@
     
 <!-- 인트로 페이지 -->
 <div id="intro-page">
-    <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
-    <!-- 임시 메인용 이미지 공간 <div class="intro-image-placeholder"></div> -->
-    <div class="chart-container intro-chart-container">
-      <h1>AI 시대, 너의 능력치는?</h1>
-      <p>우리는 모두 AI와 함께 살아가는 시대의 탐험가야. 🧭<br>
-        간단한 테스트를 통해 나의 AI 활용 스타일을 알아보고,<br>
-        최강의 '육각형 인간'으로 레벨 업 해보자!</p>
-      <button id="start-btn">시작하기</button>
-    </div>
-    <div class="chart-container">
-    <svg viewBox="0 0 200 200">
-      <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" />
-          <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      <!-- 육각형 -->
-      <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
-      <!-- 반짝이는 점 -->
-      <circle class="sparkle" cx="160" cy="40" r="5"/>
-      <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
-      <circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
-    </svg>
+     <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
+        <div class="chart-container">
+            <svg viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" />
+                        <stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <polygon class="hexagon" points="100,10 190,55 190,145 100,190 10,145 10,55"/>
+                <circle class="sparkle" cx="160" cy="40" r="5"/>
+                <circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/>
+                <circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+            </svg>
+            <canvas id="introRadarChart"></canvas>
+        </div>
 
-    <!-- 레이더 차트 -->
-    <!--<canvas id="myRadarChart"></canvas> -->
-    <canvas id="introRadarChart"></canvas>
-    </div>
-</div>        
-    
+        <h1>AI 시대, 너의 능력치는?</h1>
+        <p>우리는 모두 AI와 함께 살아가는 시대의 탐험가야. 🧭<br>
+           간단한 테스트를 통해 나의 AI 활용 스타일을 알아보고,<br>
+           최강의 '육각형 인간'으로 레벨 업 해보자!</p>
+        <button id="start-btn">시작하기</button>
+</div>       
 
 <div id="survey-page" style="display:none;">
-  <div id="hexagon-graph-container">
-    <canvas id="hexagon-chart"></canvas>
-  </div>
   <h2 id="question-text"></h2>
   <div id="choices-container"></div>
 </div>
 
-
     
 <div id="result-page" style="display:none;">
     <h2>나의 AI 능력치 분석 결과</h2>
-    <div class="chart-container result-chart-container">
+    <div class="chart-container">
         <svg viewBox="0 0 200 200">
             <defs>
                 <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -77,13 +65,11 @@
     <div id="guidelines"></div>
     <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
 </div>
-
-    
+   
 
 <div id="quiz-page" style="display:none;">
     <h2>실전! 능력 강화 퀴즈</h2>
     <p>오른쪽의 상황 카드를 왼쪽의 알맞은 능력 카드 위로 드래그해서 옮겨보세요!</p>
-
     <div class="quiz-container">
         <div id="concepts">
             <div class="concept-item" data-match="autonomy">주체적 의사결정능력</div>
@@ -103,60 +89,16 @@
             <div class="scenario-item" draggable="true" data-answer="autonomy">AI에게 추천받은 공부 계획을 그대로 따르지 않고, 나의 상황에 맞게 수정하여 최종 계획을 세웠다.</div>
         </div>
     </div>
-
     <button id="complete-quiz-btn">퀴즈 완료</button>
 </div>
 
 <div id="final-page" style="display:none;">
-  <div id="sparkling-hexagon">✨</div> <h2>🎉축하합니다!🎉</h2>
-  <p>당신은 'AI 마스터 육각형 인간'으로 거듭났습니다!</p>
-  <button id="download-btn">나의 결과 다운로드하기</button>
+    <div id="sparkling-hexagon">✨</div> 
+        <h2>🎉축하합니다!🎉</h2>
+        <p>당신은 'AI 마스터 육각형 인간'으로 거듭났습니다!</p>
+      <button id="download-btn">나의 결과 다운로드하기</button>
 </div>
 
-
-<script src="script.js"></script>
-  <script>
-    const ctx = document.getElementById('myRadarChart');
-
-    new Chart(ctx, {
-      type: 'radar',
-      data: {
-        labels: ['주체적 의사결정', '비판적 사고', '윤리적 판단', 'AI 소통', '데이터 통제', '창의적 활용'],
-        datasets: [{
-          label: '내 능력치',
-          data: [3, 4, 2, 5, 3, 4], // 점수 예시
-          fill: true,
-          backgroundColor: 'rgba(255, 105, 180, 0.2)',
-          borderColor: 'rgba(255, 105, 180, 1)',
-          pointBackgroundColor: 'rgba(255, 105, 180, 1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          r: {
-            angleLines: { color: '#ddd' },
-            grid: { color: '#eee' },
-            suggestedMin: 0,
-            suggestedMax: 5,
-            ticks: {
-              stepSize: 1,
-              backdropColor: 'transparent'
-            },
-            pointLabels: {
-              color: '#333',
-              font: { size: 12 }
-            }
-          }
-        },
-        plugins: {
-          legend: { display: false }
-        }
-      }
-    });
-  </script>
+<script src="script.js"></script> 
 </body>
 </html>
