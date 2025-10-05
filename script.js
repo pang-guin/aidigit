@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } }
             ]
         }
-        // 질문 6가지
+        // 영역별 6가지 질문
     ];
 
     let currentQuestionIndex = 0;
