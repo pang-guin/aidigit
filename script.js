@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }    
     
    // 결과 페이지를 표시하는 새로운 함수
-    function showResults() {
+ function showResults() {
         let lowestScore = Infinity;
         let lowestKey = '';
         for (const key in userScores) {
@@ -128,13 +128,23 @@ document.addEventListener('DOMContentLoaded', () => {
             resultText.innerHTML = resultsData[lowestKey].text;
             guidelines.innerHTML = resultsData[lowestKey].guide;
         }
-
-        // ✨ 설문 결과 점수로 결과 페이지 캔버스에 차트 그리기
         drawChart(resultChartCanvas, Object.values(userScores), false);
-        
         pages.survey.style.display = 'none';
         pages.result.style.display = 'block';
     }
+
+    function selectChoice(scores) {
+        for (const key in scores) {
+            userScores[key] += scores[key];
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }
+    
     // 차트를 그리는 함수
     function drawChart(canvasElement, scoreData, isIntroChart = false) {
         if (!canvasElement) return;
@@ -204,36 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-        // 모든 점수가 충분히 높으면 'perfect' 유형으로 처리 (예시: 최저점이 7점 이상)
-        if (lowestScore >= 7) {
-            resultText.innerHTML = resultsData.perfect.text;
-            guidelines.innerHTML = resultsData.perfect.guide;
-        } else {
-            // 가장 낮은 점수 영역의 결과 문구와 가이드라인을 화면에 표시
-            resultText.innerHTML = resultsData[lowestKey].text;
-            guidelines.innerHTML = resultsData[lowestKey].guide;
-        }
-
-        // 서베이 페이지 숨기고 결과 페이지 보여주기
-        pages.survey.style.display = 'none';
-        pages.result.style.display = 'block';
-    }
-
-    // 선택지를 클릭했을 때 실행되는 함수 (수정됨)
-    function selectChoice(scores) {
-        for (const key in scores) {
-            userScores[key] += scores[key];
-        }
-        console.log("현재 점수:", userScores); // 점수 변경 실시간 확인용
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            // 모든 질문이 끝나면 새로운 결과 표시 함수를 호출
-            showResults();
-        }
-    }
-
+    
 // --- 4. 이벤트 리스너 연결 ---
     const introExampleData = [7, 6, 8, 7, 5, 9];
     if (introChartCanvas) {
