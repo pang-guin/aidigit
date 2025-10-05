@@ -1,112 +1,93 @@
-const startBtn = document.getElementById('start-btn');
-startBtn.addEventListener('click', () => {
-  // 인트로 페이지 숨기고 설문 페이지 보여주기
-  document.getElementById('intro-page').style.display = 'none';
-  document.getElementById('survey-page').style.display = 'block';
-  loadQuestion(0); // 첫 번째 질문 로드
-});
+// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행되도록 하여 오류를 방지합니다.
+document.addEventListener('DOMContentLoaded', () => {
 
-let currentQuestionIndex = 0;
-let userScores = { autonomy: 0, critical: 0, ethics: 0, comms: 0, data: 0, creative: 0 };
+    // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
+    const pages = {
+        intro: document.getElementById('intro-page'),
+        survey: document.getElementById('survey-page'),
+        result: document.getElementById('result-page'),
+        quiz: document.getElementById('quiz-page'),
+        final: document.getElementById('final-page')
+    };
 
-// 육각형 차트 초기화 (Chart.js 예시)
-const ctx = document.getElementById('hexagon-chart');
-const myChart = new Chart(ctx, {
-  type: 'radar', // 레이더 차트가 육각형 모양에 적합
-  data: {
-    labels: ['주체성', '비판력', '윤리성', '소통력', '통제력', '창의성'],
-    datasets: [{
-      label: '나의 AI 능력치',
-      data: Object.values(userScores),
-      fill: true,
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgb(255, 99, 132)',
-    }]
-  },
-  options: { scales: { r: { beginAtZero: true, max: 10 } } }
-});
+    const startBtn = document.getElementById('start-btn');
+    const questionText = document.getElementById('question-text');
+    const choicesContainer = document.getElementById('choices-container');
+    // (추후 다른 버튼들도 여기에 추가)
 
-function loadQuestion(index) {
-  const q = questions[index];
-  document.getElementById('question-text').innerText = q.question;
-  const choicesContainer = document.getElementById('choices-container');
-  choicesContainer.innerHTML = ''; // 이전 선택지 삭제
+    // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
+    const questions = [
+        {
+            question: "조별 과제로 보고서를 써야 할 때, 너의 선택은?",
+            choices: [
+                { text: "일단 AI에게 \"OO 보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } },
+                { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } },
+                { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } }
+            ]
+        },
+        {
+            question: "AI가 '한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?",
+            choices: [
+                { text: "\"오, 그렇구나!\" AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } },
+                { text: "\"뭔가 이상한데?\" 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } },
+                { text: "\"AI가 틀렸네\" 하고 무시하고 넘어간다.", scores: { critical: -1 } }
+            ]
+        },
+        // 여기에 나머지 4개 영역 질문을 추가하세요.
+    ];
 
-  q.choices.forEach(choice => {
-    const button = document.createElement('button');
-    button.innerText = choice.text;
-    button.onclick = () => selectChoice(choice.scores);
-    choicesContainer.appendChild(button);
-  });
-}
+    let currentQuestionIndex = 0;
+    let userScores = { autonomy: 5, critical: 5, ethics: 5, comms: 5, data: 5, creative: 5 }; // 기본 점수 5점에서 시작
 
-function selectChoice(scores) {
-  // 점수 업데이트
-  for (const key in scores) {
-    userScores[key] += scores[key];
-  }
+    // --- 3. 핵심 기능 함수들 ---
 
-  // 차트 업데이트
-  myChart.data.datasets[0].data = Object.values(userScores);
-  myChart.update();
+    // 질문을 화면에 표시하는 함수
+    function loadQuestion() {
+        // 현재 질문 데이터를 가져옴
+        const currentQuestion = questions[currentQuestionIndex];
+        questionText.innerText = currentQuestion.question;
 
-  currentQuestionIndex++;
-  if (currentQuestionIndex < questions.length) {
-    loadQuestion(currentQuestionIndex);
-  } else {
-    showResults(); // 모든 질문 완료 시 결과 페이지로 이동
-  }
-}
+        // 이전 선택지들을 초기화
+        choicesContainer.innerHTML = '';
 
-function showResults() {
-  document.getElementById('survey-page').style.display = 'none';
-  document.getElementById('result-page').style.display = 'block';
-
-  // 최종 차트 다시 그리기 (혹은 기존 차트 재활용)
-  // ... 차트 그리는 코드 ...
-
-  // 점수가 가장 낮은 영역 찾기
-  const lowestScoreKey = Object.keys(userScores).reduce((a, b) => userScores[a] < userScores[b] ? a : b);
-
-  // 해당 영역의 결과 텍스트와 가이드라인 보여주기
-  document.getElementById('result-text').innerHTML = resultsText[lowestScoreKey].low;
-  document.getElementById('guidelines').innerHTML = `<h3>${lowestScoreKey} UP! 맞춤 가이드라인</h3>...`; 
-}
-
-// HTML5 Drag and Drop API 사용
-const scenarios = document.querySelectorAll('.scenario-item');
-const concepts = document.querySelectorAll('.concept-item');
-
-scenarios.forEach(scenario => {
-  scenario.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text/plain', scenario.dataset.answer);
-  });
-});
-
-concepts.forEach(concept => {
-  concept.addEventListener('dragover', e => e.preventDefault());
-  concept.addEventListener('drop', e => {
-    e.preventDefault();
-    const droppedAnswer = e.dataTransfer.getData('text/plain');
-    if (concept.dataset.match === droppedAnswer) {
-      concept.classList.add('correct');
-      // 정답 처리 로직
+        // 현재 질문의 선택지들을 버튼으로 만들어 화면에 추가
+        currentQuestion.choices.forEach(choice => {
+            const button = document.createElement('button');
+            button.innerText = choice.text;
+            button.onclick = () => selectChoice(choice.scores); // 버튼 클릭 시 selectChoice 함수 실행
+            choicesContainer.appendChild(button);
+        });
     }
-  });
-});
 
-// 결과 다운로드 기능 (html2canvas 라이브러리 활용 예시)
-// <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> 추가 필요
+    // 선택지를 클릭했을 때 실행되는 함수
+    function selectChoice(scores) {
+        // 점수 업데이트 (이 부분은 지금은 주석 처리, 차트 기능 추가 시 활성화)
+        /*
+        for (const key in scores) {
+            userScores[key] += scores[key];
+        }
+        console.log(userScores); // 점수 변경 확인용
+        */
 
-document.getElementById('download-btn').addEventListener('click', () => {
-  // 다운로드할 영역(결과 페이지)을 선택
-  const resultPage = document.getElementById('result-page');
+        // 다음 질문으로 이동
+        currentQuestionIndex++;
 
-  html2canvas(resultPage).then(canvas => {
-    const image = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = image;
-    link.download = 'My_AI_Hexagon.png';
-    link.click();
-  });
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion(); // 다음 질문이 있으면 로드
+        } else {
+            // 모든 질문이 끝나면 결과 페이지 보여주기
+            pages.survey.style.display = 'none';
+            pages.result.style.display = 'block';
+        }
+    }
+
+    // --- 4. 이벤트 리스너 연결 ---
+
+    // 시작하기 버튼 클릭 이벤트
+    startBtn.addEventListener('click', () => {
+        pages.intro.style.display = 'none';  // 인트로 페이지 숨기기
+        pages.survey.style.display = 'block'; // 설문 페이지 보여주기
+        loadQuestion(); // 첫 번째 질문 로드
+    });
+
 });
