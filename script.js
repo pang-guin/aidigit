@@ -1,4 +1,27 @@
-    const ctx = document.getElementById('myRadarChart');
+ // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
+    const pages = {
+        intro: document.getElementById('intro-page'),
+        survey: document.getElementById('survey-page'),
+        result: document.getElementById('result-page'),
+        quiz: document.getElementById('quiz-page'),
+        final: document.getElementById('final-page')
+    };
+
+    // ✨ 오류 수정: 존재하는 버튼만 먼저 찾도록 수정
+    const startBtn = document.getElementById('start-btn');
+    const questionText = document.getElementById('question-text');
+    const choicesContainer = document.getElementById('choices-container');
+    const resultText = document.getElementById('result-text');
+    const guidelines = document.getElementById('guidelines');
+    
+    // ✨ 오류 수정: 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가해야 합니다.
+    // const goToQuizBtn = document.getElementById('go-to-quiz-btn');
+    // const downloadBtn = document.getElementById('download-btn');
+    // const completeQuizBtn = document.getElementById('complete-quiz-btn');
+
+
+
+const ctx = document.getElementById('myRadarChart');
     new Chart(ctx, {
         type: 'radar',
         data: {
@@ -54,27 +77,6 @@
 // HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
 // 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
-    const pages = {
-        intro: document.getElementById('intro-page'),
-        survey: document.getElementById('survey-page'),
-        result: document.getElementById('result-page'),
-        quiz: document.getElementById('quiz-page'),
-        final: document.getElementById('final-page')
-    };
-
-    // ✨ 오류 수정: 존재하는 버튼만 먼저 찾도록 수정
-    const startBtn = document.getElementById('start-btn');
-    const questionText = document.getElementById('question-text');
-    const choicesContainer = document.getElementById('choices-container');
-    const resultText = document.getElementById('result-text');
-    const guidelines = document.getElementById('guidelines');
-    
-    // ✨ 오류 수정: 이 버튼들은 나중에 필요할 때 찾도록 하거나, HTML에 추가해야 합니다.
-    // const goToQuizBtn = document.getElementById('go-to-quiz-btn');
-    // const downloadBtn = document.getElementById('download-btn');
-    // const completeQuizBtn = document.getElementById('complete-quiz-btn');
 
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
@@ -219,6 +221,14 @@ document.addEventListener('DOMContentLoaded', () => {
         loadQuestion();
     });
 
+
+
+
+
+
+
+
+    
     // ✨ [실전 퀴즈 풀러가기] 버튼은 아직 기능 연결 전이므로 전체 주석 처리
     /*
     const goToQuizBtn = document.getElementById('go-to-quiz-btn');
