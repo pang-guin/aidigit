@@ -2,62 +2,18 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <!-- 반응형 모바일 버전을 위한 뷰포트 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 능력치 테스트</title>
+
+     <link rel="stylesheet" href="style.css">
+    <!-- 차트용 외부 자바스크립트 -->
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      background: #f0f8ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      flex-direction: column;
-    }
-
-    .chart-container {
-      position: relative;
-      width: 350px;
-      height: 350px;
-    }
-
-    svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    canvas {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hexagon {
-      stroke: #555;
-      stroke-width: 3;
-      fill: url(#grad);
-      filter: drop-shadow(0 0 12px rgba(255, 182, 255, 0.7));
-    }
-
-    /* 반짝이는 효과 */
-    .sparkle {
-      fill: white;
-      opacity: 0;
-      animation: sparkle 2s infinite;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-  </style>
+ 
 </head>
 <body>
 
-<!-- 메인페이지 --!>
+<!-- 메인페이지 -->
  
 <body>
   <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
@@ -84,8 +40,6 @@
     <!-- 레이더 차트 -->
     <canvas id="myRadarChart"></canvas>
   </div>
-
-
 
     
 <div id="intro-page">
