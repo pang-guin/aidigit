@@ -110,41 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             choicesContainer.appendChild(button);
         });
     }    
-    
-   // 결과 페이지를 표시하는 새로운 함수
- function showResults() {
-        let lowestScore = Infinity;
-        let lowestKey = '';
-        for (const key in userScores) {
-            if (userScores[key] < lowestScore) {
-                lowestScore = userScores[key];
-                lowestKey = key;
-            }
-        }
-        if (lowestScore >= 7) {
-            resultText.innerHTML = resultsData.perfect.text;
-            guidelines.innerHTML = resultsData.perfect.guide;
-        } else {
-            resultText.innerHTML = resultsData[lowestKey].text;
-            guidelines.innerHTML = resultsData[lowestKey].guide;
-        }
-        drawChart(resultChartCanvas, Object.values(userScores), false);
-        pages.survey.style.display = 'none';
-        pages.result.style.display = 'block';
-    }
 
-    function selectChoice(scores) {
-        for (const key in scores) {
-            userScores[key] += scores[key];
-        }
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            showResults();
-        }
-    }
-    
     // 차트를 그리는 함수
     function drawChart(canvasElement, scoreData, isIntroChart = false) {
         if (!canvasElement) return;
@@ -215,6 +181,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     
+    
+   // 결과 페이지를 표시하는 새로운 함수
+    function showResults() {
+        let lowestScore = Infinity;
+        let lowestKey = '';
+        for (const key in userScores) {
+            if (userScores[key] < lowestScore) {
+                lowestScore = userScores[key];
+                lowestKey = key;
+            }
+        }
+
+        if (lowestScore >= 7) {
+            resultText.innerHTML = resultsData.perfect.text;
+            guidelines.innerHTML = resultsData.perfect.guide;
+        } else {
+            resultText.innerHTML = resultsData[lowestKey].text;
+            guidelines.innerHTML = resultsData[lowestKey].guide;
+        }
+
+        drawChart(resultChartCanvas, Object.values(userScores), false);
+        
+        pages.survey.style.display = 'none';
+        pages.result.style.display = 'block';
+    }
+
+    function selectChoice(scores) {
+        for (const key in scores) {
+            userScores[key] += scores[key];
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }
+    
+
 // --- 4. 이벤트 리스너 연결 ---
     const introExampleData = [7, 6, 8, 7, 5, 9];
     if (introChartCanvas) {
