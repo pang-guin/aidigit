@@ -15,33 +15,41 @@
                 pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
             }]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false, // ✨ 컨테이너 크기에 맞게 비율을 조정하도록 허용
-            scales: {
-                r: {
-                    angleLines: { color: '#ddd' },
-                    grid: { color: '#eee' },
-                    suggestedMin: 0,
-                    suggestedMax: 10, // ✨ 점수 최댓값을 10으로 설정
-                    ticks: {
-                        stepSize: 2, // 눈금 단위를 2로 변경
-                        backdropColor: 'transparent'
-                    },
-                    pointLabels: {
-                        color: '#333',
-                        font: {
-                            size: 12 // 폰트 크기는 유지하되, 전체 차트가 커져서 상대적으로 잘 보임
-                        }
-                    }
-                }
+      options: {
+    responsive: true,
+    maintainAspectRatio: false, // 컨테이너 비율에 맞춰 조절
+    layout: {
+        padding: 15 // ✨ 차트 전체의 내부 여백을 조절하여 중심에 더 가깝게 만듭니다. (값 조정 가능)
+    },
+    scales: {
+        r: {
+            angleLines: { color: '#ddd' },
+            grid: { color: '#eee' },
+            suggestedMin: 0,
+            suggestedMax: 10,
+            ticks: {
+                stepSize: 2,
+                backdropColor: 'transparent',
+                display: false // ✨ 숫자 눈금(0, 2, 4...)을 숨깁니다. (육각형 배경에 가려져 필요 없을 수 있습니다.)
             },
-            plugins: {
-                legend: { display: false }
+            pointLabels: {
+                color: '#333',
+                font: { size: 12 },
+                padding: 10, // ✨ 라벨(주체성, 비판력 등)과 차트 중심 사이의 여백을 조절합니다.
+                callback: function(value, index, values) {
+                    // ✨ 라벨이 너무 길면 줄 바꿈을 할 수 있습니다.
+                    if (value.includes(' ')) { // 공백이 있다면
+                        return value.split(' ');
+                    }
+                    return value;
+                }
             }
         }
-    });
-
+    },
+    plugins: {
+        legend: { display: false }
+    }
+}
 
 // HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
 // 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
