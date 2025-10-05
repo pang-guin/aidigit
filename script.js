@@ -1,3 +1,48 @@
+    const ctx = document.getElementById('myRadarChart');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['주체성', '비판력', '윤리성', '소통력', '데이터', '창의성'],
+            datasets: [{
+                label: '내 능력치',
+                data: [8, 7, 5, 9, 6, 8], // script.js의 점수 체계와 맞춘 예시
+                fill: true,
+                backgroundColor: 'rgba(255, 105, 180, 0.2)',
+                borderColor: 'rgba(255, 105, 180, 1)',
+                pointBackgroundColor: 'rgba(255, 105, 180, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255, 105, 180, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // ✨ 컨테이너 크기에 맞게 비율을 조정하도록 허용
+            scales: {
+                r: {
+                    angleLines: { color: '#ddd' },
+                    grid: { color: '#eee' },
+                    suggestedMin: 0,
+                    suggestedMax: 10, // ✨ 점수 최댓값을 10으로 설정
+                    ticks: {
+                        stepSize: 2, // 눈금 단위를 2로 변경
+                        backdropColor: 'transparent'
+                    },
+                    pointLabels: {
+                        color: '#333',
+                        font: {
+                            size: 12 // 폰트 크기는 유지하되, 전체 차트가 커져서 상대적으로 잘 보임
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+
 // HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
 // 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
 document.addEventListener('DOMContentLoaded', () => {
