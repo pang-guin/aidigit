@@ -3,3 +3,37 @@
   <p>우리는 모두 AI와 함께 살아가는 시대의 탐험가야. 🧭<br>간단한 테스트를 통해 너만의 AI 활용 스타일을 알아보고,<br>최강의 '육각형 인간'으로 레벨 업 해보자!</p>
   <button id="start-btn">시작하기</button>
 </div>
+
+<div id="survey-page" style="display:none;">
+  <div id="hexagon-graph-container">
+    <canvas id="hexagon-chart"></canvas>
+  </div>
+  <h2 id="question-text"></h2>
+  <div id="choices-container"></div>
+</div>
+
+<div id="result-page" style="display:none;">
+  <h2>나의 AI 능력치 분석 결과</h2>
+  <canvas id="final-hexagon-chart"></canvas>
+  <div id="result-text"></div>
+  <div id="guidelines"></div>
+  <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
+</div>
+
+<div id="quiz-page" style="display:none;">
+  <h2>실전! 능력 강화 퀴즈</h2>
+  <div class="quiz-container">
+    <div id="concepts">
+      <div class="concept-item" data-match="ethics">윤리적 판단력</div>
+      </div>
+    <div id="scenarios">
+      <div class="scenario-item" draggable="true" data-answer="ethics">AI가 생성한 그림을 내 작품인 것처럼...</div>
+      </div>
+  </div>
+</div>
+
+<div id="final-page" style="display:none;">
+  <div id="sparkling-hexagon">✨</div> <h2>🎉축하합니다!🎉</h2>
+  <p>당신은 'AI 마스터 육각형 인간'으로 거듭났습니다!</p>
+  <button id="download-btn">나의 결과 다운로드하기</button>
+</div>
