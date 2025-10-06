@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         drawChart(resultChartCanvas, Object.values(userScores), false);
         
         pages.survey.style.display = 'none';
-        pages.result.style.display = 'block';
+        pages.result.style.display = 'flex';
     }
 
     function selectChoice(scores) {
@@ -220,12 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
-
     
     
     
 // --- 3. 페이지 로드 시 인트로 차트 그리기 ---
-    const introExampleData = [7, 6, 8, 7, 5, 9];
+    const introExampleData = [9, 8, 8, 7, 5, 9];
     if (introChartCanvas) {
         drawChart(introChartCanvas, introExampleData, true);
     }
@@ -234,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
    // [시작하기] 버튼 클릭 이벤트 (인트로 -> 설문)
     startBtn.addEventListener('click', () => {
         pages.intro.style.display = 'none';
-        pages.survey.style.display = 'block';
+        pages.survey.style.display = 'flex';  //
         loadQuestion();
     });
     
@@ -242,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     goToQuizBtn.addEventListener('click', () => {
         pages.result.style.display = 'none';
-        pages.quiz.style.display = 'block';
+        pages.quiz.style.display = 'flex';
     });
     */
 
@@ -250,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /*
     completeQuizBtn.addEventListener('click', () => {
         pages.quiz.style.display = 'none';
-        pages.final.style.display = 'block';
+        pages.final.style.display = 'flex';
     });
     */
 
@@ -260,4 +259,4 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
     });
     */
-});
+  });
