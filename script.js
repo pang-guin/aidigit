@@ -260,3 +260,4 @@ document.addEventListener('DOMContentLoaded', () => {
         alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
     });
     */
+});
