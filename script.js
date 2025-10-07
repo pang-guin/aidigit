@@ -1,6 +1,7 @@
-// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행
+// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행토록 함. 물론 현재 html의 <body> 맨 아래에 <script>를 넣어놔서 스크립트가 html보다 먼저 실행되는 오류는 없음.
 document.addEventListener('DOMContentLoaded', () => {
   // 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
+  
   // --- 1. 필요한 HTML 요소들을 ID로 찾아 변수에 저장 ---
     const pages = {
         intro: document.getElementById('intro-page'),
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 설문 페이지 요소
     const questionText = document.getElementById('question-text');
     const choicesContainer = document.getElementById('choices-container');
+    const backBtn = document.getElementById('back-btn');
     // 결과 페이지 요소
     const resultText = document.getElementById('result-text');
     const guidelines = document.getElementById('guidelines');
@@ -34,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
-        { question: "1. 조별 과제로 보고서를 써야 할 때, 너의 선택은?", choices: [ { text: "일단 AI에게 \"보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } }, { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } }, { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } } ] },
-        { question: "2. AI가 '한국의 수도는 부산'이라는 정보를 알려줬다. 너의 반응은?", choices: [ { text: "\"오, 그렇구나!\" AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } }, { text: "\"뭔가 이상한데?\" 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } }, { text: "\"AI가 틀렸네\" 하고 무시하고 넘어간다.", scores: { critical: -1 } } ] },
+        { question: `1. 과제로 보고서를 써야 할 때, 너의 선택은?`, choices: [ { text: "일단 AI에게 \"보고서 써줘\"라고 요청하고, 제출한다.", scores: { autonomy: -2, creative: -1 } }, { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } }, { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } } ] },
+        { question: `2. AI가 \'한국의 수도는 부산\'이라는 정보를 알려줬다. 
+        너의 반응은?`, choices: [ { text: "'오, 잘못 알고 있었네!' AI가 알려줬으니 정확한 정보일 것이라고 믿는다.", scores: { critical: -2 } }, { text: "뭔가 이상한데? 다른 검색 엔진이나 책을 통해 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } }, { text: "\"AI가 틀렸네.\" 하고 무시하고 넘어간다.", scores: { critical: -1 } } ] },
         { question: "3. 친구의 얼굴 사진으로 재미있는 AI 밈(meme)을 만들고 싶을 때, 너는?", choices: [ { text: "일단 만들고 본다. 재밌으면 장땡! 친구도 웃어넘길 것이다.", scores: { ethics: -2 } }, { text: "만들기 전에 친구에게 \"네 사진으로 AI 밈 만들어도 괜찮아?\"라고 먼저 물어본다.", scores: { ethics: 2 } }, { text: "혹시 친구가 기분 나쁠 수도 있으니, 연예인 사진으로 밈을 만든다.", scores: { ethics: 1 } } ] },
         { question: "4. 코딩 숙제를 하다가 막혔을 때, AI에게 어떻게 질문할까?", choices: [ { text: "그냥 \"코딩 오류 해결해 줘\"라고 막연하게 질문한다.", scores: { comms: -1 } }, { text: "내가 사용한 프로그래밍 언어, 발생한 오류 메시지, 내가 시도해 본 방법을 구체적으로 포함하여 질문한다.", scores: { comms: 2 } }, { text: "오류 코드를 그대로 복사해서 붙여넣기만 한다.", scores: { comms: 1 } } ] },
         { question: "5. 새로운 AI 앱에서 '주소록 및 사진 접근 권한'을 요구한다. 너의 행동은?", choices: [ { text: "앱을 빨리 쓰고 싶으니까, 내용을 읽지 않고 '전체 동의'를 누른다.", scores: { data: -2 } }, { text: "이 앱의 기능을 사용하는 데 정말 주소록과 사진이 필요한지 꼼꼼히 따져보고, 불필요하다면 동의하지 않는다.", scores: { data: 2 } }, { text: "일단 동의하고, 나중에 찝찝하면 앱을 삭제한다.", scores: { data: -1 } } ] },
@@ -71,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     let currentQuestionIndex = 0;
     let userScores = { autonomy: 5, critical: 5, ethics: 5, comms: 5, data: 5, creative: 5 };
+    let answerHistory = []; 
     let currentQuizIndex = 0;
   
 
@@ -86,9 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
         currentQuestion.choices.forEach(choice => {
             const button = document.createElement('button');
             button.innerText = choice.text;
-            button.onclick = () => selectChoice(choice.scores); // 버튼 클릭 시 selectChoice 함수 실행
+            button.onclick = () => selectChoice(choice.scores);
             choicesContainer.appendChild(button);
         });
+        // 첫 질문 빼고 '이전 질문' 버튼 모이게
+        if (currentQuestionIndex > 0) {
+        backBtn.style.display = 'block';
+        } else {
+        backBtn.style.display = 'none';
+        }
     }    
 
     // 차트를 그리는 함수
@@ -187,6 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function selectChoice(scores) {
+        answerHistory.push(scores); //점수 기록
+        
         for (const key in scores) {
             userScores[key] += scores[key];
         }
@@ -198,6 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
   
+  function goBack() {
+    // 1. 히스토리에서 마지막 답변의 점수를 가져오고 배열에서 제거.
+    const lastScores = answerHistory.pop();
+
+    // 2. 마지막에 더했던 점수를 다시 빼서 점수를 원상 복구
+    for (const key in lastScores) {
+        userScores[key] -= lastScores[key];
+    }
+
+    // 3. 질문 번호를 하나 뒤로 돌립니다.
+    currentQuestionIndex--;
+
+    // 4. 이전 질문을 다시 화면에 로드합니다.
+    loadQuestion();
+    }  
   
      function startQuiz() {
         currentQuizIndex = 0;
@@ -278,6 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pages.survey.style.display = 'flex';  //
         loadQuestion();
     });
+  
+    backBtn.addEventListener('click', goBack);
     
     // [실전 퀴즈 풀러가기] 
     goToQuizBtn.addEventListener('click', () => {
