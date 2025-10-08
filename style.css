@@ -2,8 +2,8 @@
 :root {
     --font-size-h1: 2.2rem;
     --font-size-h2: 1.8rem;
-    --font-size-p: 1.5rem;
-    --font-size-button: 1.4rem;
+    --font-size-p: 1.4rem;
+    --font-size-button: 1.3rem;
 }
 
 body, html {
@@ -14,17 +14,13 @@ body, html {
 }
 
 body {
-    background: #f0f8ff;
-    
-    /* 아래 세 줄을 추가하세요 */
+    background: #f0f8ff;  
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 /* --- 페이지별 레이아웃 설정 --- */
-
-/* ✨ 수정: .chart-container를 이 그룹에서 삭제했습니다. */
 #survey-page, #result-page, #quiz-page, #final-page, #explanation-page {
     display: flex;
     flex-direction: column;
