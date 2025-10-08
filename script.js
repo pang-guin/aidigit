@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                         pointLabels: {
                             color: '#333',
-                            font: { size: 14 },
+                            font: { size: 17 },
                             padding: 10,
                             callback: function(value, index, values) {
                                 if (value.includes(' ')) {
