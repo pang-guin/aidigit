@@ -25,7 +25,7 @@ body {
 /* --- 페이지별 레이아웃 설정 --- */
 
 /* ✨ 수정: .chart-container를 이 그룹에서 삭제했습니다. */
-#survey-page, #result-page, #quiz-page, #final-page {
+#survey-page, #result-page, #quiz-page, #final-page, #explanation-page {
     display: flex;
     flex-direction: column;
     align-items: center;
