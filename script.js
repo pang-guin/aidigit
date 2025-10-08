@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultChartCanvas = document.getElementById('resultRadarChart');
     let introChartInstance = null; // 인트로 차트 인스턴스
     let resultChartInstance = null; // 결과 차트 인스턴스
+    let introAnimationInterval = null; // ✨ 추가: 인트로 애니메이션을 제어할 변수
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
@@ -292,11 +293,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     
-  // 페이지 로드 시 인트로 차트 그리기
-    const introExampleData = [9, 8, 8, 7, 5, 9];
-    if (introChartCanvas) {
-        drawChart(introChartCanvas, introExampleData, true);
-    }
+// 페이지 로드 시 인트로 차트 그리기 (애니메이션 효과)
+const initialData = [7, 7, 7, 7, 7, 7]; // 시작할 때 보일 초기 데이터
+if (introChartCanvas) {
+    drawChart(introChartCanvas, initialData, true); // 먼저 차트를 한번 그림
+
+    // 0.5초마다 차트 데이터를 랜덤하게 변경하여 업데이트
+    introAnimationInterval = setInterval(() => {
+        const randomData = [];
+        for (let i = 0; i < 6; i++) {
+            // 5에서 10 사이의 랜덤 숫자 생성
+            const randomNumber = Math.random() * 6 + 4; 
+            randomData.push(randomNumber);
+        }
+        
+        // introChartInstance가 생성된 후에만 데이터 업데이트
+        if (introChartInstance) {
+            introChartInstance.data.datasets[0].data = randomData;
+            introChartInstance.update(); // 부드럽게 차트를 다시 그림
+        }
+    }, 1000); // 500ms = 0.5초
+}
 
   // 이벤트 리스너 연결
     // [시작하기] (인트로 -> 설문)
