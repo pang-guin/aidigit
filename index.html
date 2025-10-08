@@ -18,10 +18,10 @@
             <canvas id="introRadarChart"></canvas>
         </div>
 
-        <h1>AI 시대, 너의 능력치는?</h1>
-        <p>우리는 모두 AI와 함께 살아가는 시대의 탐험가야. 🧭<br>
-           간단한 테스트를 통해 나의 AI 활용 스타일을 알아보고,<br>
-           최강의 '육각형 인간'으로 레벨 업 해보자!</p>
+        <h1>나는 AI를 주체적으로 사용하고 있을까?</h1>
+        <p>우리는 모두 AI와 함께 살아가고 있다.<br>
+           간단한 테스트를 통해 나만의 AI 활용 가이드를 알아보고,<br>
+           인공지능을 주체적으로 사용하는 최강의 '육각형 인간'으로 레벨 업 해보자!</p>
         <button id="start-btn">시작하기</button>
     </div>
 
@@ -45,21 +45,28 @@
         <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
     </div>
 
-    <div id="quiz-page" style="display:none;">
+  <div id="quiz-page" style="display:none;">
         <h2>실전! 능력 강화 퀴즈</h2>
         <p>주어진 문장을 올바르게 완성하는 선택지를 골라보세요.</p>
-        
+       
         <div id="quiz-question-container">
              <p id="quiz-question-text"></p>
         </div>
        
         <div id="quiz-choices-container">
             </div>
+     
 
         <div id="progress-bar-container">
             <div id="progress-bar"></div>
         </div>
          <button id="complete-quiz-btn" style="display:none;">결과 보기</button>
+    </div>
+             
+  <div id="explanation-page" style="display:none;">
+        <h2>정답 해설</h2>
+        <p id="explanation-text" style="text-align: left; background-color: white; padding: 1.5rem; border-radius: 10px;"></p>
+        <button id="next-quiz-btn">다음 문제로</button>
     </div>
   
     <div id="final-page" style="display:none;">
