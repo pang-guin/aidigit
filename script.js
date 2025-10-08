@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizChoicesContainer = document.getElementById('quiz-choices-container');
     const progressBar = document.getElementById('progress-bar');
     const completeQuizBtn = document.getElementById('complete-quiz-btn');
+    const explanationPage = document.getElementById('explanation-page');
+    const explanationImage = document.getElementById('explanation-image');
+    const explanationText = document.getElementById('explanation-text');
+    const nextQuizBtn = document.getElementById('next-quiz-btn');
     // 차트 요소
     const introChartCanvas = document.getElementById('introRadarChart');
     const resultChartCanvas = document.getElementById('resultRadarChart');
@@ -56,22 +60,106 @@ document.addEventListener('DOMContentLoaded', () => {
         perfect: { text: "✨ 당신은 이미 '육각형 인간'! ✨ AI를 다루는 당신의 능력은 완벽에 가깝군요! AI는 당신의 손에서 최고의 파트너가 될 것입니다. 지금처럼 꾸준히 AI를 현명하게 활용하며 멋진 미래를 만들어나가세요!", guide: "<h3>🏆 완벽 가이드</h3><p>축하합니다! 당신은 이미 모든 영역에서 뛰어난 능력을 보여주고 있습니다. 꾸준히 새로운 AI 기술에 관심을 가지고, 주변 친구들에게도 좋은 AI 활용법을 알려주는 리더가 되어주세요!</p>" }
     };
   
-    // 퀴즈데이터 12문제
-  const quizQuestions = [
-        { question: "AI가 추천해 준 여행 계획을 검토 없이 그대로 따르기보다, (...) 나의 상황에 맞게 수정하여 최종 계획을 세웠다.", choices: ["나의 취향과 예산을 고려하여", "친구가 좋다고 해서", "가장 저렴한 옵션이라서"], answer: "나의 취향과 예산을 고려하여" },
-        { question: "AI에게 보고서 초안을 부탁한 뒤, (...) 완성했다.", choices: ["내 이름만 추가하여", "내가 조사한 내용과 의견을 추가하여", "디자인만 살짝 바꿔서,"], answer: "내가 조사한 내용과 의견을 추가하여" },
-        { question: "AI가 생성한 뉴스 기사를 읽을 때 (...) 다른 언론사 기사와 교차 확인했다.", choices: ["제목이 자극적이라서", "내용이 흥미로워서", "정보의 출처를 명확히 알 수 없어서"], answer: "정보의 출처를 명확히 알 수 없어서" },
-        { question: "AI 챗봇이 '모든 버섯은 식용 가능하다'고 알려줬을 때, (...) 전문가의 의견이나 신뢰할 수 있는 자료를 찾아봤다.", choices: ["그 말을 곧이곧대로 믿지 않고,", "신기한 정보라고 생각하고,", "친구들에게 바로 전달하고,"], answer: "그 말을 곧이곧대로 믿지 않고," },
-        { question: "친구의 사진을 AI 필터에 넣기 전에, (...) 먼저 친구의 허락을 구했다.", choices: ["재미있는 결과가 나올 것 같아서", "내 마음대로 해도 된다고 생각해서", "개인의 초상권을 존중해야 하므로"], answer: "개인의 초상권을 존중해야 하므로" },
-        { question: "AI로 만든 음악을 공모전에 제출할 때, (...) AI 사용 규정을 꼼꼼히 확인하고 준수했다.", choices: ["아무도 모를 것이라고 생각하고", "저작권 및 공모전의 윤리 규정을 지키기 위해", "수상 확률을 높이기 위해"], answer: "저작권 및 공모전의 윤리 규정을 지키기 위해" },
-        { question: "구체적으로 원하는 이미지를 생성하기 위해 AI에게 (...)라고 지시했다.", choices: ["'슬픈 표정으로 앉아 있는 주황색 고양이를 수채화 스타일로 그려줘'", "'고양이'", "'슬픈 고양이'"], answer: "'슬픈 표정으로 앉아 있는 주황색 고양이를 수채화 스타일로 그려줘'" },
-        { question: "코딩 문제 해결을 위해, (...) 라고 질문했다.", choices: ["'코드가 동작이 안돼.'", "'81번째 줄에서 오류가 났어. 이 파이썬 코드를 보고 list의 중복 항목을 제거하는 코드를 알려줘'", "'오류 나는데?'"], answer: "'81번째 줄에서 오류가 났어. 이 파이썬 코드를 보고 list의 중복 항목을 제거하는 코드를 알려줘'" },
-        { question: "회원가입 시 (...)", choices: ["모든 약관에 전체 동의하지않고 불필요한 '선택' 항목은 동의하지 않았다.", "확인하지 않고 전체 동의를 눌렀다.", "혜택을 더 받을 수 있을 것 같아서 전체 동의를 눌렀다."], answer: "모든 약관에 전체 동의하지않고 불필요한 '선택' 항목은 동의하지 않았다." },
-        { question: "출처가 불분명한 앱을 설치할 때 (...) '주소록 접근 권한' 요구는 거부했다.", choices: ["개인정보 유출의 위험성이 있으므로", "저장 공간이 부족해서", "앱 아이콘이 마음에 안 들어서"], answer: "개인정보 유출의 위험성이 있으므로" },
-        { question: "AI가 만든 음악 코드를 (...) 멜로디와 가사를 더해 곡을 만들었다.", choices: ["그대로 사용하여 과제물로 제출하지 않고, 직접", "그대로 사용하고 AI가 자동으로 만들어 준", "사용하고, 유명 가수의 목소리를 학습한 목소리에 "], answer: "그대로 사용하여 과제물로 제출하지 않고, 직접" },
-        { question: "AI가 생성한 여러 디자인 시안 중에서 (...) 요소를 조합하여 최종 로고를 완성했다.", choices: ["내 의도와 어울리는 것을 검토한 뒤 가장 마음에 드는", "유명 로고와 헷갈리도록 가장 잘 따라한", "AI가 가장 먼저 추천한"], answer: "내 의도와 어울리는 것을 검토한 뒤 가장 마음에 드는" }
-    ];
-
+    // 설문조사에서 응답한 것에 해설 및 설명이 될 수 있도록 연결되는 내용으로 퀴즈 추가
+const quizQuestions = [
+    { 
+        question: "AI가 추천해 준 여행 계획을 검토 없이 그대로 따르기보다, (...) 나의 상황에 맞게 수정하여 최종 계획을 세웠다.", 
+        choices: ["나의 취향과 예산을 고려하여", "친구가 좋다고 해서", "가장 저렴한 옵션이라서"], 
+        answer: "나의 취향과 예산을 고려하여",
+        explanation: {
+            text: "<strong>주체적 의사결정능력!</strong></br> AI는 훌륭한 조언자이지만, 최종 결정은 나만의 기준과 가치관에 따라야 해요. AI의 제안을 비판적으로 검토하고 내 상황에 맞게 수정하는 것이 중요합니다."
+        }
+    },
+    { 
+        question: "AI에게 보고서 초안을 부탁한 뒤, (...) 완성했다.", 
+        choices: ["내 이름만 추가하여", "내가 조사한 내용과 의견을 추가하여", "디자인만 살짝 바꿔서,"], 
+        answer: "내가 조사한 내용과 의견을 추가하여",
+        explanation: {
+            text: "<strong>창의적 활용 능력!</strong> AI가 만든 결과물을 그대로 사용하는 것은 창의적인 활용이 아니에요. AI를 아이디어를 발전시키는 파트너로 삼고, 나만의 생각과 노력을 더해 결과물을 완성해야 합니다."
+        }
+    },
+    { 
+        question: "AI가 생성한 뉴스 기사를 읽을 때 (...) 다른 언론사 기사와 교차 확인했다.", 
+        choices: ["제목이 자극적이라서", "내용이 흥미로워서", "정보의 출처를 명확히 알 수 없어서"], 
+        answer: "정보의 출처를 명확히 알 수 없어서",
+        explanation: {
+            text: "<strong>비판적 사고력!</strong> AI는 때로 틀리거나 편향된 정보를 생성할 수 있어요. AI가 제공하는 정보가 사실인지 항상 다른 공신력 있는 자료와 비교하여 확인(교차 확인)하는 습관이 중요합니다."
+        }
+    },
+    { 
+        question: "AI 챗봇이 '모든 버섯은 식용 가능하다'고 알려줬을 때, (...) 전문가의 의견이나 신뢰할 수 있는 자료를 찾아봤다.", 
+        choices: ["그 말을 곧이곧대로 믿지 않고,", "신기한 정보라고 생각하고,", "친구들에게 바로 전달하고,"], 
+        answer: "그 말을 곧이곧대로 믿지 않고,",
+        explanation: {
+            text: "<strong>비판적 사고력!</strong> 특히 안전과 관련된 정보에 대해서는 AI의 답변을 맹신해서는 안 돼요. 생명이나 건강에 영향을 줄 수 있는 정보는 반드시 전문가나 신뢰할 수 있는 출처를 통해 재확인해야 합니다."
+        }
+    },
+    { 
+        question: "친구의 사진을 AI 필터에 넣기 전에, (...) 먼저 친구의 허락을 구했다.", 
+        choices: ["재미있는 결과가 나올 것 같아서", "내 마음대로 해도 된다고 생각해서", "개인의 초상권을 존중해야 하므로"], 
+        answer: "개인의 초상권을 존중해야 하므로",
+        explanation: {
+            text: "<strong>윤리적 판단력!</strong> 다른 사람의 사진이나 개인정보를 AI에 활용할 때는 반드시 당사자의 동의를 구해야 해요. 이는 개인의 초상권과 프라이버시를 존중하는 기본적인 AI 윤리입니다."
+        }
+    },
+    { 
+        question: "AI로 만든 음악을 공모전에 제출할 때, (...) AI 사용 규정을 꼼꼼히 확인하고 준수했다.", 
+        choices: ["아무도 모를 것이라고 생각하고", "저작권 및 공모전의 윤리 규정을 지키기 위해", "수상 확률을 높이기 위해"], 
+        answer: "저작권 및 공모전의 윤리 규정을 지키기 위해",
+        explanation: {
+            text: "<strong>윤리적 판단력!</strong> AI를 활용할 때는 기술을 사용하는 커뮤니티의 규칙과 법적 규제(저작권 등)를 이해하고 지키는 것이 중요합니다. 정정당당하게 AI를 활용하는 태도가 필요해요."
+        }
+    },
+    { 
+        question: "구체적으로 원하는 이미지를 생성하기 위해 AI에게 (...)라고 지시했다.", 
+        choices: ["'슬픈 표정으로 앉아 있는 주황색 고양이를 수채화 스타일로 그려줘'", "'고양이'", "'슬픈 고양이'"], 
+        answer: "'슬픈 표정으로 앉아 있는 주황색 고양이를 수채화 스타일로 그려줘'",
+        explanation: {
+            text: "<strong>AI 소통능력!</strong> AI에게 원하는 결과를 얻으려면 명확하고 구체적으로 지시해야 해요. 배경, 대상, 스타일, 형식 등 구체적인 맥락을 제공할수록 AI는 내 의도를 더 정확하게 파악합니다."
+        }
+    },
+    { 
+        question: "코딩 문제 해결을 위해, (...) 라고 질문했다.", 
+        choices: ["'코드가 동작이 안돼.'", "'81번째 줄에서 오류가 났어. 이 파이썬 코드를 보고 list의 중복 항목을 제거하는 코드를 알려줘'", "'오류 나는데?'"], 
+        answer: "'81번째 줄에서 오류가 났어. 이 파이썬 코드를 보고 list의 중복 항목을 제거하는 코드를 알려줘'",
+        explanation: {
+            text: "<strong>AI 소통능력!</strong> 막연한 질문보다는 문제 상황, 내가 시도해 본 것, 원하는 결과 등을 구체적으로 설명해야 AI가 효과적인 해결책을 제시할 수 있어요. 좋은 질문이 좋은 답변을 만듭니다."
+        }
+    },
+    { 
+        question: "회원가입 시 (...)", 
+        choices: ["모든 약관에 전체 동의하지않고 불필요한 '선택' 항목은 동의하지 않았다.", "확인하지 않고 전체 동의를 눌렀다.", "혜택을 더 받을 수 있을 것 같아서 전체 동의를 눌렀다."], 
+        answer: "모든 약관에 전체 동의하지않고 불필요한 '선택' 항목은 동의하지 않았다.",
+        explanation: {
+            text: "<strong>데이터 통제력!</strong></br>서비스 이용에 꼭 필요하지 않은 개인정보 '선택' 항목까지 무심코 동의하면 내 정보가 원치 않는 곳에 활용될 수 있어요. 내 정보의 주권은 나에게 있음을 기억해야 합니다."
+        }
+    },
+    { 
+        question: "출처가 불분명한 앱을 설치할 때 (...) '주소록 접근 권한' 요구는 거부했다.", 
+        choices: ["개인정보 유출의 위험성이 있으므로", "저장 공간이 부족해서", "앱 아이콘이 마음에 안 들어서"], 
+        answer: "개인정보 유출의 위험성이 있으므로",
+        explanation: {
+            text: "<strong>데이터 통제력!</strong> 스마트폰의 주소록, 사진첩 등은 매우 민감한 개인정보예요. 앱이 어떤 권한을 요구하는지, 그 권한이 앱의 기능에 꼭 필요한지 꼼꼼히 따져보고 결정하는 것이 안전합니다."
+        }
+    },
+    { 
+        question: "AI가 만든 음악 코드를 (...) 멜로디와 가사를 더해 곡을 만들었다.", 
+        choices: ["그대로 사용하여 과제물로 제출하지 않고, 직접", "그대로 사용하고 AI가 자동으로 만들어 준", "사용하고, 유명 가수의 목소리를 학습한 목소리에 "], 
+        answer: "그대로 사용하여 과제물로 제출하지 않고, 직접",
+        explanation: {
+            text: "<strong>창의적 활용 능력!</strong> AI의 제안을 출발점으로 삼아 나만의 아이디어를 결합할 때 진정한 '창작'이 이루어집니다. AI는 창작의 재료를 제공하는 훌륭한 파트너가 될 수 있어요."
+        }
+    },
+    { 
+        question: "AI가 생성한 여러 디자인 시안 중에서 (...) 요소를 조합하여 최종 로고를 완성했다.", 
+        choices: ["내 의도와 어울리는 것을 검토한 뒤 가장 마음에 드는", "유명 로고와 헷갈리도록 가장 잘 따라한", "AI가 가장 먼저 추천한"], 
+        answer: "내 의도와 어울리는 것을 검토한 뒤 가장 마음에 드는",
+        explanation: {
+            text: "<strong>주체적 의사결정능력!</strong> AI는 다양한 선택지를 제공할 수 있지만, 최종적으로 어떤 결과물이 나의 의도와 목표에 가장 부합하는지 판단하고 선택하는 것은 사용자의 몫입니다. AI는 도구일 뿐, 결정의 주체는 나 자신입니다."
+        }
+    }
+];
+  
   
     let currentQuestionIndex = 0;
     let userScores = { autonomy: 5, critical: 5, ethics: 5, comms: 5, data: 5, creative: 5 };
@@ -240,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const quiz = quizQuestions[currentQuizIndex];
         // 문장의 일부를 (...) 기준으로 분리하여 괄호 안에 선택지가 들어갈 것을 암시
-        quizQuestionText.innerHTML = quiz.question.replace('(...)', '<span style="color: #007BFF; font-weight: bold;">(        )</span>');
+        quizQuestionText.innerHTML = quiz.question.replace('(...)', '<span style="color: #007BFF; font-weight: bold;">( ________ )</span>');
         quizChoicesContainer.innerHTML = '';
         
         quiz.choices.forEach(choiceText => {
@@ -262,16 +350,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button.style.borderColor = '#28a745';
 
             setTimeout(() => {
-                currentQuizIndex++;
-                if (currentQuizIndex < quizQuestions.length) {
-                    loadQuizQuestion();
-                } else {
-                    // 퀴즈 완료
-                    quizQuestionText.innerText = "모든 퀴즈를 완료했습니다!";
-                    quizChoicesContainer.innerHTML = "";
-                    completeQuizBtn.style.display = 'block';
-                }
-            }, 800); // 0.8초 후 다음 문제로
+            // 문제 해설 보여주기
+            showExplanation(); 
+        }, 800); 
+          
         } else {
             // 오답일 경우
             button.classList.add('shake');
@@ -292,6 +374,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+  
+    // 해설 페이지를 보여주는 함수
+    function showExplanation() {
+     const quiz = quizQuestions[currentQuizIndex];
+
+      // 1. 해설 데이터 설정
+     // explanationImage.src = quiz.explanation.image;
+     explanationText.innerHTML = quiz.explanation.text;
+
+      // 2. 퀴즈 페이지 숨기고 해설 페이지 보이기
+      pages.quiz.style.display = 'none';
+      explanationPage.style.display = 'flex';
+} 
+  
+  // 다음 문제로 넘어가는 함수
+function loadNextQuiz() {
+    currentQuizIndex++; // 다음 문제로 인덱스 증가
+
+    // 1. 해설 페이지 숨기고 퀴즈 페이지 보이기
+    explanationPage.style.display = 'none';
+    pages.quiz.style.display = 'flex';
+
+    if (currentQuizIndex < quizQuestions.length) {
+        loadQuizQuestion(); // 다음 문제가 있으면 로드
+    } else {
+        // 모든 퀴즈 완료
+        quizQuestionText.innerText = "모든 퀴즈를 완료했습니다!";
+        quizChoicesContainer.innerHTML = "";
+        completeQuizBtn.style.display = 'block';
+    }
+}
     
 // 페이지 로드 시 인트로 차트 그리기 (애니메이션 효과)
 const initialData = [7, 7, 7, 7, 7, 7]; // 시작할 때 보일 초기 데이터
@@ -330,7 +443,9 @@ if (introChartCanvas) {
         pages.result.style.display = 'none';
         pages.quiz.style.display = 'flex';
         startQuiz();
-    });
+    }); 
+    // [다음 문제로]
+     nextQuizBtn.addEventListener('click', loadNextQuiz);
    
     // [퀴즈 완료] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
     completeQuizBtn.addEventListener('click', () => {
