@@ -492,4 +492,3 @@ if (introChartCanvas) {
     });
     */
   });
-
