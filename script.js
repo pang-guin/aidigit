@@ -47,15 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         { question: "3. 친구의 얼굴 사진으로 재미있는 AI 밈(meme)을 만들고 싶을 때, 너는?", choices: [ { text: "일단 만들고 본다. 재밌으면 친구도 웃어넘길 것이다.", scores: { ethics: -2 } }, { text: "만들기 전에 친구에게 \"네 사진으로 AI 밈 만들어도 괜찮아?\"라고 먼저 물어본다.", scores: { ethics: 2 } }, { text: "친구가 기분 나쁠 수도 있으니, 연예인 사진으로 밈을 만든다.", scores: { ethics: 1 } } ] },
         { question: "4. 코딩 숙제를 하다가 막혔을 때, AI에게 어떻게 질문할까?", choices: [ { text: "그냥 \"코딩 오류 해결해 줘\"라고 질문한다.", scores: { comms: -1 } }, { text: "내가 사용한 프로그래밍 언어, 발생한 오류 메시지, 내가 시도해 본 방법을 구체적으로 포함하여 질문한다.", scores: { comms: 2 } }, { text: "오류 코드를 그대로 복사해서 붙여넣기만 한다.", scores: { comms: 1 } } ] },
         { question: "5. 새로운 AI 앱에서 '주소록 및 사진 접근 권한'을 요구한다. 너의 행동은?", choices: [ { text: "앱을 빨리 쓰기 위해 내용을 읽지 않고 '전체 동의'를 누른다.", scores: { data: -2 } }, { text: "이 앱의 기능을 사용하는 데 정말 주소록과 사진이 필요한지 따져보고, 불필요하면 동의하지 않는다.", scores: { data: 2 } }, { text: "일단 동의하고, 나중에 찝찝하면 앱을 삭제한다.", scores: { data: -1 } } ] },
-        { question: "6. 학교 축제 포스터를 만들어야 한다. AI를 어떻게 활용할까?", choices: [ { text: "AI에게 \"학교 축제 포스터 만들어줘\"라고 입력하고, 나온 결과물 중 하나를 그대로 사용한다.", scores: { creative: -1 } }, { text: "AI에게 '레트로 스타일', '우주 컨셉' 등 다양한 키워드를 조합하며 포스터 아이디어 스케치를 여러 개 생성해 본 후, 가장 마음에 드는 아이디어를 바탕으로 내가 직접 디자인을 완성한다.", scores: { comms: 2, creative: 2 } }, { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } } ],     
-    { question: `7. AI 영화 추천 서비스가 내가 싫어하는 영화를 연달아 추천했다. 이때 나는?`, choices: [ { text: "AI가 추천했으니 반드시 재미있을 거야. 일단 본다.", scores: { autonomy: -1 } }, { text: "나의 취향을 더 명확히 알려주고, 다른 영화를 추천해달라고 한다.", scores: { autonomy: 1, comms: 1 } }, { text: "AI 추천은 무시하고, 내가 직접 다른 영화를 찾아본다.", scores: { autonomy: 1 } } ] },
-    { question: `8. AI가 내일 중요한 시험에 나올 것이라며 예상 문제 목록을 만들어줬다.`, choices: [ { text: "AI를 믿고 이 문제들만 집중적으로 공부한다.", scores: { autonomy: -2, critical: -1 } }, { text: "AI가 만든 문제는 참고하면서 교과서 전체 범위를 내 계획대로 공부한다.", scores: { autonomy: 2, critical: 1 } }, { text: "AI가 알려준 문제들 위주로 보고, 시간이 남으면 다른 문제를 본다..", scores: { autonomy: -1 } } ] },
-    { question: `9. AI가 '바나나가 모든 병을 치료한다'는 놀라운 정보를 알려주었다.`, choices: [ { text: "새로운 사실을 알게 되었다! 가족에게 바로 공유한다.", scores: { critical: -2, ethics: -1 } }, { text: "바나나에 어떤 성분이 있는지 추가로 조사해본다.", scores: { critical: 2, data: 1 } }, { text: "의학적으로 검증된 것인지 뉴스를 찾아 추가로 확인한다.", scores: { critical: 2, data: 1 } } ] },
-    { question: `10. 인터넷에서 유명 연예인이 논란이 될 만한 발언을 하는 영상을 보았다. 당신의 행동은?`,   choices: [ 
-        { text: "영상이니 사실일 것이다. 즉시 친구들에게 공유한다.", scores: { critical: -2, ethics: -2 } }, 
+        { question: "6. 학교 축제 포스터를 만들어야 한다. AI를 어떻게 활용할까?", choices: [ { text: "AI에게 \"학교 축제 포스터 만들어줘\"라고 입력하고, 나온 결과물 중 하나를 그대로 사용한다.", scores: { creative: -1 } }, { text: "AI에게 '레트로 스타일', '우주 컨셉' 등 다양한 키워드를 조합하며 포스터 아이디어 스케치를 여러 개 생성해 본 후, 가장 마음에 드는 아이디어를 바탕으로 내가 직접 디자인을 완성한다.", scores: { comms: 2, creative: 2 } }, { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } } ] }, 
+        { question: `7. AI 영화 추천 서비스가 내가 싫어하는 영화를 연달아 추천했다. 이때 나는?`, choices: [ { text: "AI가 추천했으니 반드시 재미있을 거야. 일단 본다.", scores: { autonomy: -1 } }, { text: "나의 취향을 더 명확히 알려주고, 다른 영화를 추천해달라고 한다.", scores: { autonomy: 1, comms: 1 } }, { text: "AI 추천은 무시하고, 내가 직접 다른 영화를 찾아본다.", scores: { autonomy: 1 } } ] },
+        { question: `8. AI가 내일 중요한 시험에 나올 것이라며 예상 문제 목록을 만들어줬다.`, choices: [ { text: "AI를 믿고 이 문제들만 집중적으로 공부한다.", scores: { autonomy: -2, critical: -1 } }, { text: "AI가 만든 문제는 참고하면서 교과서 전체 범위를 내 계획대로 공부한다.", scores: { autonomy: 2, critical: 1 } }, { text: "AI가 알려준 문제들 위주로 보고, 시간이 남으면 다른 문제를 본다..", scores: { autonomy: -1 } } ] },
+        { question: `9. AI가 '바나나가 모든 병을 치료한다'는 놀라운 정보를 알려주었다.`, choices: [ { text: "새로운 사실을 알게 되었다! 가족에게 바로 공유한다.", scores: { critical: -2, ethics: -1 } }, { text: "바나나에 어떤 성분이 있는지 추가로 조사해본다.", scores: { critical: 2, data: 1 } }, { text: "의학적으로 검증된 것인지 뉴스를 찾아 추가로 확인한다.", scores: { critical: 2, data: 1 } } ] },
+        { question: `10. 인터넷에서 유명 연예인이 논란이 될 만한 발언을 하는 영상을 보았다. 당신의 행동은?`,   choices: [ { text: "영상이니 사실일 것이다. 즉시 친구들에게 공유한다.", scores: { critical: -2, ethics: -2 } }, 
         { text: "AI로 만든 영상이 많으니 가짜일 수도 있겠다고 생각한다.", scores: { critical: 1 } }, 
-        { text: "딥페이크일 가능성이 있으니 해당 연예인의 공식 입장이나 사실 확인 기사를 찾아본다.", scores: { critical: 2, data: 1 } } 
-    ] },
+        { text: "딥페이크일 가능성이 있으니 해당 연예인의 공식 입장이나 사실 확인 기사를 찾아본다.", scores: { critical: 2, data: 1 } } ] },
     { question: `11. 과제로 제출할 그림을 AI로 생성했다. 이 그림을 제출할 때 나는?`, choices: [ { text: "AI를 사용한 사실을 밝히고, 어떤 도구와 프롬프트를 썼는지 적는다.", scores: { ethics: 2 } }, { text: "내가 쓴 프롬프트이니 직접 그린 것으로 생각하고 제출한다.", scores: { ethics: -2 } }, { text: "AI가 그렸지만, 내가 검토하고 선정했으니 내 작품으로 제출한다.", scores: { ethics: -1 } } ] },
     { question: `12. 좋아하는 가수의 목소리를 학습한 AI 커버 노래를 발견했다. 어떻게 행동할까?`, choices: [ { text: "신기하고 재밌으니, 다른 가수 목소리로도 만들어달라고 요청한다.", scores: { ethics: -1 } }, { "text": "원곡 가수와 작곡가의 저작권, 가수의 인격권을 침해할 수 있음을 인지하고 소비를 지양한다.", scores: { ethics: 2 } }, { text: "공식 음원이 아니니, 개인적으로 듣고 즐기는 것은 괜찮다고 생각한다.", scores: { ethics: 1 } } ] },
 
@@ -131,7 +129,7 @@ const quizQuestions = [
         choices: ["아무도 모를 것이라고 생각하고", "저작권 및 공모전의 윤리 규정을 지키기 위해", "수상 확률을 높이기 위해"], 
         answer: "저작권 및 공모전의 윤리 규정을 지키기 위해",
         explanation: {
-            text: "<strong>윤리적 판단력!</strong></br> AI를 활용할 때는 기술을 사용하는 커뮤니티의 규칙과 법적 규제(저작권 등)를 이해하고 지키는 것이 중요합니다. 정정당당하게 AI를 활용하춤
+            text: "<strong>윤리적 판단력!</strong></br> AI를 활용할 때는 기술을 사용하는 커뮤니티의 규칙과 법적 규제(저작권 등)를 이해하고 지키는 것이 중요합니다. 바르게 AI를 활용하는 것이 나와 우리 모두를 위한 방법입니다.
         pages.intro.style.display = 'none';
         pages.survey.style.display = 'flex';
         loadQuestion();
