@@ -2,9 +2,10 @@
 :root {
     --font-size-h1: 2.2rem;
     --font-size-h2: 1.8rem;
-    --font-size-p: 1.4rem;
+    --font-size-p: 1.3rem;
     --font-size-button: 1.3rem;
 }
+
 
 body, html {
     margin: 0;
@@ -18,6 +19,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#result-text {
+    font-size: 1.2rem; /* 글자 크기 (1rem이 기본 크기) */
+    line-height: 1.7;  /* 줄 간격 */
+    margin-bottom: 1rem; /* 아래쪽 여백 */
 }
 
 /* --- 페이지별 레이아웃 설정 --- */
@@ -180,4 +187,3 @@ svg { z-index: 0; }
     90% { transform: translateX(-10px); }
     100% { transform: translateX(0); }
 }
-
