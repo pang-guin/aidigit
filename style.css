@@ -148,9 +148,31 @@ svg { z-index: 0; }
     border: 2px solid #007BFF;
 }
 
+
+
+
 #quiz-choices-container button:hover {
     background-color: #e9f4ff;
 }
+
+/* --- 서베이 진행바 스타일 --- */
+#survey-progress-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 25px; /* 질문과의 간격 */
+    overflow: hidden;
+}
+
+#survey-progress-bar {
+    height: 12px;
+    width: 0%; /* 시작은 0% */
+    background-color: #ff69b4; /* 분홍색 */
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out; /* 부드러운 애니메이션 효과 */
+}
+
 
 #progress-bar-container {
     width: 100%;
@@ -187,3 +209,17 @@ svg { z-index: 0; }
     90% { transform: translateX(-10px); }
     100% { transform: translateX(0); }
 }
+
+/* --- 결과 차트 반짝임 효과 --- */
+@keyframes blinking-effect {
+  from {
+    /* 연한 분홍색 그림자 */
+    box-shadow: 0 0 15px #ffc0cb, 0 0 25px #ffc0cb;
+  }
+  to {
+    /* 조금 더 진한 분홍색 그림자 */
+    box-shadow: 0 0 25px #ff99b3, 0 0 35px #ff99b3;
+  }
+}
+
+
