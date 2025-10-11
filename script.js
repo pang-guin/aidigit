@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { question: `16. AI 챗봇과 대화하며 개인적인 고민을 털어놓고 싶을 때, 어떻게 해야 할까?`, choices: [ { text: "상담사처럼 편안하게 내 이름, 학교, 친구 관계 등 모든 것을 솔직하게 이야기한다.", scores: { data: -2, ethics: -1 } }, { text: "개인정보(실명, 주소 등)는 제외하고, 고민 상황만 일반화하여 조언을 구한다.", scores: { data: 2 } }, { text: "AI가 내 정보를 기억했다가 나중에 맞춤형 답변을 해줄 테니 좋을 것이라고 생각한다.", scores: { data: -1 } } ] },
 
     // 창의성 (Creativity)
-    { question: `17. AI가 글짓기 대회 주제에 맞춰 평범한 시의 초안을 작성해 주었다.`, choices: [ { text: "AI가 써준 시를 그대로 제출한다. 내가 쓴 것보다 낫다.", scores: { creative: -2, autonomy: -1 } }, { text: "AI가 제안한 몇 가지 시구나 표현만 참고하여, 완전히 새로운 나만의 시를 쓴다.", scores: { creative: 2, autonomy: 1 } }, { text: "AI가 써준 시의 단어 몇 개만 내가 아는 다른 단어로 바꾼다.", scores: { creative: -1 } } ] },
+    { question: `17. 대회에 제출할 시를 쓰려고 한다. 이때 나는?`, choices: [ { text: " AI가 나보다 낫다! AI가 써준 시를 그대로 제출한다.", scores: { creative: -2, autonomy: -1 } }, { text: "AI가 제안한 몇 가지 표현을 참고하여, 나만의 시를 새로쓴다.", scores: { creative: 2, autonomy: 1 } }, { text: "AI에게 좋아하는 작가 시를 주고 비슷하게 만들어달라고 해서 제출한다.", scores: { creative: -1 } } ] },
     { question: `18. AI 작곡 도구를 이용해 짧은 배경음악을 만들었다. 이 음악을 어떻게 활용할까?`, choices: [ { text: "AI가 만든 음악의 코드 진행을 바탕으로, 나만의 새로운 멜로디를 입혀 곡을 완성한다.", scores: { creative: 2 } }, { text: "만들어진 음악을 내 유튜브 영상 배경음악으로 바로 사용한다.", scores: { creative: -1 } }, { text: "여러 번 생성해서 가장 듣기 좋은 것 하나를 저장해두고 감상용으로만 듣는다.", scores: { creative: 1 } } ] }
 ];
 
