@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { text: "AI에게 축제 주제, 주요 컨셉, 참여 대상 등을 구체적으로 설명해서 그림을 생성하고 마음에 드는 것을 활용하여 최종 디자인을 완성한다.", scores: { comms: 2, creative: 2 } },
           { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } } ] },    
         { question: `7. AI 영화 추천 서비스가 내가 싫어하는 영화를 연달아 추천했다. 이때 나는?`, choices: [ 
-          { text: "나의 취향을 예시를 들어 추가 설명하고, 다른 영화를 추천해달라고 한다.", scores: { autonomy: 2, comms: 2 } },
+          { text: "나의 취향을 예시를 들어 추가 설명하고, 다시 추천해달라고 한다.", scores: { autonomy: 2, comms: 2 } },
           { text: "AI가 추천했으니 반드시 재미있을 거야. 일단 본다.", scores: { autonomy: -1 } }, 
           { text: "AI에게 추천한 이유를 물어 그 기준을 확인해본다.", scores: { autonomy: 2, comms: 2 } } ] },
         { question: `8. AI가 내일 중요한 시험에 나올 것이라며 예상 문제 목록을 만들어줬다.`, choices: [ 
