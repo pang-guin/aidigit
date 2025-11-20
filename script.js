@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
           { text: "포스터에 들어갈 멋진 캐치프레이즈나 문구를 AI에게 추천받는다.", scores: { creative: 1 } } ] },    
         { question: `7. AI 영화 추천 서비스가 내가 싫어하는 영화를 연달아 추천했다. 이때 나는?`, choices: [ 
           { text: "AI가 추천했으니 반드시 재미있을 거야. 일단 본다.", scores: { autonomy: -1 } }, 
-          { text: "나의 취향을 예시를 들어 추가 설명하고, 다른 영화를 추천해달라고 한다.", scores: { autonomy: 2, comms: 1 } }, 
-          { text: "AI에게 추천한 이유를 물어 그 기준을 확인해본다.", scores: { autonomy: 2, comms: 1 } } ] },
+          { text: "나의 취향을 예시를 들어 추가 설명하고, 다른 영화를 추천해달라고 한다.", scores: { autonomy: 2, comms: 2 } }, 
+          { text: "AI에게 추천한 이유를 물어 그 기준을 확인해본다.", scores: { autonomy: 2, comms: 2 } } ] },
         { question: `8. AI가 내일 중요한 시험에 나올 것이라며 예상 문제 목록을 만들어줬다.`, choices: [ 
           { text: "이 문제들만 집중적으로 공부한다.", scores: { autonomy: -2, critical: -1 } }, 
           { text: "AI가 만든 문제는 참고하면서 교과서 전체 범위를 내 계획대로 공부한다.", scores: { autonomy: 2, critical: 1 } }, 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { question: `17. 대회에 제출할 시를 쓰려고 한다. 이때 나는?`, choices: [ 
           { text: " AI가 나보다 낫다! AI가 쓴 시를 바로 제출한다.", scores: { creative: -2, autonomy: -1 } }, 
           { text: "AI의 제안을 참고하여, 나만의 시를 새로쓴다.", scores: { creative: 2, autonomy: 1 } }, 
-          { text: "AI에게 좋아하는 작가 시를 주고 비슷하게 만들어달라고 해서 제출한다.", scores: { creative: -1, ethics: -2 } } ] },
+          { text: "AI에게 좋아하는 작가 시를 주고 비슷하게 만들어달라고 해서 제출한다.", scores: { comms: 1, ethics: -2 } } ] },
         { question: `18. AI 작곡 도구를 짧은 배경음악을 만들었다. 어떻게 활용할까?`, choices: [ 
           { text: "AI가 만든 음악에 나만의 새로운 멜로디를 섞어 곡을 완성한다.", scores: { creative: 1 } }, 
           { text: "만들어진 음악의 사용 범위를 사이트에서 확인한다.", scores: { ethics: 2 } }, 
