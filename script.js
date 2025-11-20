@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { text: "AI에게 \"보고서 써줘\"라고 요청해 나온 결과물을 과제로 제출한다.", scores: { autonomy: -2, creative: -1 } }, 
           { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } }, 
           { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } } ] },
-        { question: `2. AI가 \'한국의 수도는 부산\'이라는</br>정보를 알려줬다. 나의 반응은?`, choices: [ 
+        { question: `2. AI가 \'한국의 수도는 부산\'이라는 정보를 알려줬다. 나의 반응은?`, choices: [ 
           { text: "'오? 바뀌었구나!' AI가 알려줬으니 정확한 정보로 생각한다.", scores: { critical: -2 } }, 
           { text: "뭔가 이상한데? 다른 자료나 책에서 사실을 다시 확인한다.", scores: { critical: 2, data: 1 } }, 
           { text: "\"AI가 틀렸네.\" 하고 무시하고 넘어간다.", scores: { critical: -1 } } ] },
