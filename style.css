@@ -55,7 +55,7 @@ body {
 /* --- 공통 요소 반응형 스타일 --- */
 h1 { font-size: var(--font-size-h1); margin-bottom: 15px; }
 h2 { font-size: var(--font-size-h2); }
-p { font-size: var(--font-size-p); line-height: 1.6; color: #555; }
+p { font-size: var(--font-size-p); line-height: 1.6; color: #0f0f0f; }
 
 button {
     padding: 0.8em 1.5em;
@@ -127,7 +127,7 @@ svg { z-index: 0; }
 }
 
 #quiz-question-text {
-    font-size: 1.5rem; /* survey 페이지의 h2와 유사한 크기 */
+    font-size: 1.3rem; /* survey 페이지의 h2와 유사한 크기 */
     font-weight: bold;
     color: #333;
     line-height: 1.5;
@@ -138,6 +138,8 @@ svg { z-index: 0; }
     flex-direction: column;
     width: 100%;
     gap: 0.8rem; /* 버튼 사이 간격 */
+    
+  
 }
 
 #quiz-choices-container button {
@@ -145,7 +147,7 @@ svg { z-index: 0; }
     margin-top: 0; /* 개별 버튼의 margin-top 제거 */
     background-color: #fff;
     color: #007BFF;
-    border: 2px solid #007BFF;
+    border: 2px solid #c7b3a4;
 }
 
 
@@ -168,7 +170,8 @@ svg { z-index: 0; }
 #survey-progress-bar {
     height: 12px;
     width: 0%; /* 시작은 0% */
-    background-color: #ff69b4; /* 분홍색 */
+    /*background-color: #ff69b4; /* 분홍색 */
+    background: linear-gradient(90deg, #ff69b4 0%, #ef572e 100%);
     border-radius: 10px;
     transition: width 0.4s ease-in-out; /* 부드러운 애니메이션 효과 */
 }
@@ -186,7 +189,7 @@ svg { z-index: 0; }
 #progress-bar {
     width: 0%;
     height: 100%;
-    background-color: #007BFF;
+    background: linear-gradient(90deg, #667eea 0%, #cbe927 100%);
     border-radius: 5px;
     transition: width 0.3s ease-in-out;
 }
@@ -223,3 +226,13 @@ svg { z-index: 0; }
 }
 
 
+
+/* --- 서베이 선택지 버튼 너비 고정 --- */
+#choices-container button {
+    width: 100%;          /* 글자수와 상관없이 같은 너비 */
+    max-width: 100%;      /* 부모 폭을 넘지 않도록 */
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #0c242c 0%, #2d4a51 100%);
+    white-space: normal;  /* 줄바꿈 허용 (필요하면) */
+    
+}
