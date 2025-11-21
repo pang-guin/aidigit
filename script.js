@@ -488,7 +488,7 @@ function loadNextQuiz() {
 }
     
 // 페이지 로드 시 인트로 차트 그리기 (애니메이션 효과)
-const initialData = [7, 7, 7, 7, 7, 7]; // 시작할 때 보일 초기 데이터
+const initialData = [5, 5, 5, 5, 5, 5]; // 시작할 때 보일 초기 데이터
 if (introChartCanvas) {
     drawChart(introChartCanvas, initialData, true); // 먼저 차트를 한번 그림
 
