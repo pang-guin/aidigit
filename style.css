@@ -76,7 +76,7 @@ button:hover {
 #start-btn {
     padding: 15px 50px;
     font-size: 1.2rem;
-    background-color: #007BFF;
+    background: linear-gradient(90deg, #0c242c 0%, #007BFF 100%);
     border-radius: 30px;
 }
 #start-btn:hover {
