@@ -117,123 +117,157 @@ svg { z-index: 0; }
 .sparkle { fill: white; opacity: 0; animation: sparkle 2s infinite; }
 @keyframes sparkle { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-/* --- 퀴즈 페이지 스타일 --- */
-#quiz-question-container {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    margin: 1.5rem 0;
+/* =========================================
+   [통합 스타일] 서베이(Survey) & 퀴즈(Quiz)
+   ========================================= */
+
+/* 1. 진행바 (Progress Bar) - 공통 스타일 */
+#survey-progress-container,
+#progress-bar-container {
     width: 100%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    max-width: 100%;
+    height: 10px;           /* 얇고 세련된 두께 */
+    background-color: #f3f4f6; /* 아주 연한 회색 배경 */
+    border-radius: 20px;    /* 둥근 끝 */
+    margin-bottom: 30px;    /* 질문 박스와의 간격 */
+    overflow: hidden;
 }
 
-#quiz-question-text {
-    font-size: 1.3rem; /* survey 페이지의 h2와 유사한 크기 */
-    font-weight: bold;
-    color: #333;
+#survey-progress-bar, 
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    /* 이미지와 유사한 보라~핑크 그라데이션 */
+    background: linear-gradient(90deg, #8b5cf6 0%, #d946ef 100%);
+    border-radius: 20px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. 질문 박스 (Card Design) - 공통 스타일 */
+/* 서베이의 #question-text와 퀴즈의 #quiz-question-container를 카드 형태로 통일 */
+#question-text,
+#quiz-question-container {
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 30px;     /* 넉넉한 내부 여백 */
+    border-radius: 24px;    /* 부드러운 모서리 */
+    margin: 0 0 24px 0;     /* 아래쪽 선택지와의 간격 */
+    
+    /* [핵심] 이미지와 같은 부드러운 그림자 효과 */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0,0,0,0.02);
+
+    /* 텍스트 스타일 */
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
     line-height: 1.5;
+    word-break: keep-all;   /* 한글 줄바꿈 최적화 */
 }
 
+/* 퀴즈 질문 내부 텍스트(p태그) 마진 초기화 */
+#quiz-question-text {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    line-height: inherit;
+}
+
+/* 3. 선택지 컨테이너 - 공통 스타일 */
+#choices-container,
 #quiz-choices-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 0.8rem; /* 버튼 사이 간격 */
-    
-  
+    gap: 12px; /* 버튼 사이 간격 */
 }
 
+/* 4. 선택지 버튼 (Card Button) - 공통 스타일 */
+#choices-container button,
 #quiz-choices-container button {
     width: 100%;
-    margin-top: 0; /* 개별 버튼의 margin-top 제거 */
-    background-color: #fff;
-    color: #007BFF;
-    border: 2px solid #c7b3a4;
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    color: #4b5563;         /* 부드러운 회색 텍스트 */
+    background: #ffffff;    /* 흰색 배경 */
+    
+    /* 테두리와 모서리 */
+    border: 2px solid #e5e7eb; 
+    border-radius: 16px;    /* 버튼 모서리 */
+    
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;       /* 왼쪽 정렬 */
+    font-weight: 500;
+    margin-top: 0;
+    line-height: 1.4;
+    
+    /* 기존 그라데이션 제거 */
+    background-image: none; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-
-
-
+/* 선택지 마우스 올렸을 때 (Hover) */
+#choices-container button:hover,
 #quiz-choices-container button:hover {
-    background-color: #e9f4ff;
+    background-color: #f9fafb; /* 아주 연한 보라빛 회색 */
+    border-color: #8b5cf6;     /* 테두리 보라색 포인트 */
+    color: #111;
+    transform: translateY(-2px); /* 살짝 떠오름 */
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15); /* 보라색 그림자 */
 }
 
-/* --- 서베이 진행바 스타일 --- */
-#survey-progress-container {
-    width: 80%;
-    max-width: 600px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    margin-bottom: 25px; /* 질문과의 간격 */
-    overflow: hidden;
+/* 선택지 클릭 시 (Active) */
+#choices-container button:active,
+#quiz-choices-container button:active {
+    transform: scale(0.98);
 }
 
-#survey-progress-bar {
-    height: 12px;
-    width: 0%; /* 시작은 0% */
-    /*background-color: #ff69b4; /* 분홍색 */
-    background: linear-gradient(90deg, #ff69b4 0%, #ef572e 100%);
-    border-radius: 10px;
-    transition: width 0.4s ease-in-out; /* 부드러운 애니메이션 효과 */
+/* 퀴즈: 정답/오답 확인 후 비활성화 버튼 스타일 */
+#quiz-choices-container button:disabled {
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.9;
 }
 
-
-#progress-bar-container {
-    width: 100%;
-    height: 10px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin-top: 2rem;
-    overflow: hidden;
+/* 5. '이전 질문' 버튼 (Survey 전용) */
+#back-btn {
+    margin-top: 30px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #9ca3af;
+    border: 1px solid #e5e7eb;
+    border-radius: 30px;
+    transition: all 0.2s;
+    font-weight: normal;
 }
 
-#progress-bar {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #cbe927 100%);
-    border-radius: 5px;
-    transition: width 0.3s ease-in-out;
+#back-btn:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-color: #d1d5db;
+    transform: none;
 }
 
-/* 오답 선택 시 버튼 흔들림 효과 */
+/* 6. 애니메이션 효과 */
+/* 오답 흔들림 */
 .shake {
-    animation: shake 0.5s;
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    10% { transform: translateX(-10px); }
-    20% { transform: translateX(10px); }
-    30% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    50% { transform: translateX(-10px); }
-    60% { transform: translateX(10px); }
-    70% { transform: translateX(-10px); }
-    80% { transform: translateX(10px); }
-    90% { transform: translateX(-10px); }
-    100% { transform: translateX(0); }
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
-/* --- 결과 차트 반짝임 효과 --- */
+/* 결과 차트 반짝임 \*/
 @keyframes blinking-effect {
-  from {
-    /* 연한 분홍색 그림자 */
-    box-shadow: 0 0 15px #ffc0cb, 0 0 25px #ffc0cb;
-  }
-  to {
-    /* 조금 더 진한 분홍색 그림자 */
-    box-shadow: 0 0 25px #ff99b3, 0 0 35px #ff99b3;
-  }
-}
-
-
-
-/* --- 서베이 선택지 버튼 너비 고정 --- */
-#choices-container button {
-    width: 100%;          /* 글자수와 상관없이 같은 너비 */
-    max-width: 100%;      /* 부모 폭을 넘지 않도록 */
-    box-sizing: border-box;
-    background: linear-gradient(90deg, #0c242c 0%, #2d4a51 100%);
-    white-space: normal;  /* 줄바꿈 허용 (필요하면) */
-    
+  from { box-shadow: 0 0 15px #ffc0cb, 0 0 25px #ffc0cb; }
+  to { box-shadow: 0 0 25px #ff99b3, 0 0 35px #ff99b3; }
 }
