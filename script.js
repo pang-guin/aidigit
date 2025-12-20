@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
           { text: "내 이름, 학교, 친구 관계 등 모든 것을 구체적으로 설명한다.", scores: { data: -2, ethics: -1 } }, 
           { text: "이름, 주소 등 개인적인 정보는 제외하고, 고민 상황만 입력한다.", scores: { data: 2 } },
           { text: "다른 친구의 개인정보를 대신 입력해서 답변을 들어본다.", scores: { data: -2,ethics: -2 } } ] },
-          { text: "AI가 그렸지만, 내가 검토하고 선정했으니 내 작품으로 제출한다.", scores: { ethics: -1 } } ] },
         { question: `12. 좋아하는 가수의 목소리를 학습한 AI 커버 노래를 발견했다. 이때 나는?`, choices: [ 
           { text: "신기하고 재밌으니, 다른 가수 목소리로도 만들어달라고 요청한다.", scores: { ethics: -2 } }, 
           { text: "공식 음원이 아니니, 개인적으로만 즐긴다.", scores: { ethics: 1 } },
