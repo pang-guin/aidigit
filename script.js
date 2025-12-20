@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { text: "오류 코드를 그대로 복사해서 붙여넣기만 한다.", scores: { comms: 1 } },
           { text: "\"코딩 오류 해결해 줘\"라고 질문한다.", scores: { comms: -1 } }, 
           { text: "내가 사용한 프로그래밍 언어, 발생한 오류 메시지, 내가 시도해 본 방법을 구체적으로 포함하여 질문한다.", scores: { comms: 2 } } ] },
-        { question: "5. 새로운 AI 앱에서 '주소록 및 사진 접근 권한'을 요구한다. 너의 행동은?", choices: [ 
+        { question: "5. 새로운 AI 앱에서 '주소록 및 사진 접근 권한'을 요구한다. 나의 행동은?", choices: [ 
           { text: "이 앱의 기능을 사용하는 데 정말 주소록과 사진이 필요한지 따져보고, 불필요하면 동의하지 않는다.", scores: { data: 2 } }, 
           { text: "일단 동의하고, 나중에 찝찝하면 앱을 삭제한다.", scores: { data: -1 } }, 
           { text: "앱을 빨리 쓰기 위해 내용을 읽지 않고 '전체 동의'를 누른다.", scores: { data: -2 } } ] },
