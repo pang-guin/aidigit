@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. 설문 데이터 (질문, 선택지, 점수) ---
     const questions = [
-        { question: `1. 과제로 보고서 쓰는 중! 너의 선택은?`, choices: [ 
+        { question: `1. 과제로 보고서 쓰는 중! 나의 선택은?`, choices: [ 
           { text: "내가 초안을 작성한 후, AI에게 어색한 문장을 다듬어 달라고 한다.", scores: { autonomy: 1, comms: 1 } }, 
           { text: "AI에게 \"보고서 써줘\"라고 요청해 나온 결과물을 과제로 제출한다.", scores: { autonomy: -2, creative: -1 } }, 
           { text: "AI에게는 자료 조사 아이디어나 목차 조언만 구하고, 보고서는 내 생각대로 작성한다.", scores: { autonomy: 2, critical: 1 } } ] },
