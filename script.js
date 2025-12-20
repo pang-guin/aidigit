@@ -101,20 +101,21 @@ document.addEventListener('DOMContentLoaded', () => {
         { question: `15. 얼굴을 분석해 미래를 예측한다는 AI 웹사이트가 내 SNS 계정 연동을 요구한다.`, choices: [ 
           { text: "내 미래!! 궁금하니 바로 계정을 연동한다.", scores: { data: -2 } }, 
           { text: "내 게시물, 친구목록까지 요구하는 것은 과도한 것 같다. 사이트 이용을 포기한다.", scores: { data: 2 } }, 
-          { text: "일단 연동하고, 결과를 본 다음에 연동을 해지한다.", scores: { data: -1 } } ] },
+          { text: "일단 연동하고, 결과를 본 다음에 연동을 해지한다.", scores: { data: -1 } } ] }
 
        /* 
-               { question: `11. 과제로 제출할 그림을 AI로 생성했다. 이 그림을 제출할 때 나는?`, choices: [ 
-          { text: "내가 쓴 프롬프트이니 직접 그린 것으로 생각하고 제출한다.", scores: { ethics: -2 } }, 
-          { text: "AI를 사용한 사실을 밝히고, 어떤 도구와 프롬프트를 썼는지 적는다.", scores: { ethics: 2 } }, 
-        { question: `17. 대회에 제출할 시를 쓰려고 한다. 이때 나는?`, choices: [ 
-          { text: "AI의 제안을 참고하여, 나만의 시를 새로쓴다.", scores: { creative: 2, autonomy: 1 } }, 
-          { text: " AI가 나보다 낫다! AI가 쓴 시를 바로 제출한다.", scores: { creative: -2, autonomy: -1 } },
-          { text: "AI에게 좋아하는 작가 시를 주고 비슷하게 만들어달라고 해서 제출한다.", scores: { comms: 1, ethics: -2 } } ] },
-        { question: `18. AI 작곡 도구를 짧은 배경음악을 만들었다. 어떻게 활용할까?`, choices: [ 
-          { text: "AI가 만든 음악에 나만의 새로운 멜로디를 섞어 곡을 완성한다.", scores: { creative: 1 } }, 
-          { text: "만들어진 음악의 사용 범위를 사이트에서 확인한다.", scores: { ethics: 2 } }, 
-          { text: "폰에 저장해두고 감상용으로만 듣는다.", scores: { creative: 1 } } ] } */
+               { question: `11. 과제로 제출할 그림을 AI로 생성했다. 이 그림을 제출할 때 나는?`, choices: [
+               { text: "AI가 그렸지만, 내가 검토하고 선정했으니 내 작품으로 제출한다."
+                { text: "내가 쓴 프롬프트이니 직접 그린 것으로 생각하고 제출한다.", scores: { ethics: -2 } }, 
+                { text: "AI를 사용한 사실을 밝히고, 어떤 도구와 프롬프트를 썼는지 적는다.", scores: { ethics: 2 } }, 
+                { question: `17. 대회에 제출할 시를 쓰려고 한다. 이때 나는?`, choices: [ 
+                  { text: "AI의 제안을 참고하여, 나만의 시를 새로쓴다.", scores: { creative: 2, autonomy: 1 } }, 
+                  { text: " AI가 나보다 낫다! AI가 쓴 시를 바로 제출한다.", scores: { creative: -2, autonomy: -1 } },
+                  { text: "AI에게 좋아하는 작가 시를 주고 비슷하게 만들어달라고 해서 제출한다.", scores: { comms: 1, ethics: -2 } } ] },
+                { question: `18. AI 작곡 도구를 짧은 배경음악을 만들었다. 어떻게 활용할까?`, choices: [ 
+                  { text: "AI가 만든 음악에 나만의 새로운 멜로디를 섞어 곡을 완성한다.", scores: { creative: 1 } }, 
+                  { text: "만들어진 음악의 사용 범위를 사이트에서 확인한다.", scores: { ethics: 2 } }, 
+                  { text: "폰에 저장해두고 감상용으로만 듣는다.", scores: { creative: 1 } } ] } */
 ];
 
        const resultsData = {
