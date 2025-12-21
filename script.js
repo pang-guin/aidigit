@@ -21,9 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const backBtn = document.getElementById('back-btn');
    const surveyProgressBar = document.getElementById('survey-progress-bar');
     // 결과 페이지 요소
+  const resultTitle = document.getElementById('result-title');
     const resultText = document.getElementById('result-text');
     const guidelines = document.getElementById('guidelines');
-    const goToQuizBtn = document.getElementById('go-to-quiz-btn');
+    const missionCompleteBtn = document.getElementById('mission-complete-btn'); // 가이드 확인 후 퀴즈 넘어가기
     // 퀴즈 페이지 요소
     const quizQuestionText = document.getElementById('quiz-question-text');
     const quizChoicesContainer = document.getElementById('quiz-choices-container');
@@ -118,22 +119,85 @@ document.addEventListener('DOMContentLoaded', () => {
                   { text: "폰에 저장해두고 감상용으로만 듣는다.", scores: { creative: 1 } } ] } */
 ];
 
-       const resultsData = {
-        autonomy: { title: "⚠️주체적 의사결정능력⚠️", text: "✨ 당신은 'AI 조종사' 타입! ✨</br> AI라는 최첨단 비행기를 즐기지만 가끔 자율주행에 너무 의존하는 편. 직접 판단하는 연습이 필요해요!", 
-                   guide: "<h3>🚀 주체성 UP 가이드</h3><p>1. AI에게 묻기 전, '나는 무엇을 얻고 싶은가?' 스스로에게 질문하기<br>2. AI의 답변은 참고자료일 뿐! 최종 결정은 나의 생각을 바탕으로 판단하기</p>" },
-        critical: { title: "⚠️비판적 사고력⚠️", text: "✨ 당신은 '순수한 믿음'의 소유자! ✨</br> AI가 하는 말이라면 한국의 수도가 부산이라 해도 믿는 편! 하지만 AI의 답변에는 오류가 있을 수 있어요!",
-                   guide: "<h3>🕵️‍♂️ 비판력 UP 가이드</h3><p>1. AI가 알려준 정보는 다른 뉴스나 책을 통해 꼭 교차 확인하기<br>2. AI에게 '그 정보의 출처가 어디야?'라고 되묻는 습관 갖기</p>" },
-        ethics: { title: "⚠️윤리적 판단력⚠️", text: "✨ 당신은 '자유로운 영혼' 타입! ✨</br> 재미와 효율이 중요한 당신! 하지만 당신의 AI 활용이 누군가에게 상처를 줄 수도 있어요. 행동하기 전 '이래도 괜찮을까?' 생각해봐요!", 
-                 guide: "<h3>🚦 윤리성 UP 가이드</h3><p>1. AI로 만든 창작물을 사용하기 전, 저작권이나 초상권을 침해하지 않는지 확인하기<br>2. 다른 사람의 정보를 AI에 입력하기 전, 반드시 상대방의 동의를 구하기</p>" },
-        comms: { title: "AI 소통능력", text: "✨ 당신은 '마음으로 말해요' 타입! ✨</br> 툭 던지듯 말해도 AI가 찰떡같이 알아주길 바라는군요! 하지만 AI는 아직 당신의 마음을 읽지 못해요!", 
-                guide: "<h3>🗣️ 소통력 UP 가이드</h3><p>1. AI에게 역할을 부여해보기 (예: '너는 이제부터 최고의 카피라이터야.')<br>2. 문제 상황에 대한 구체적인 설명, 내가 원하는 결과물을 제시하기</p>" },
-        data: { title: "⚠️데이터 통제력⚠️", text: "✨ 당신은 '쿨한 신뢰'의 소유자! ✨</br> '무슨 일 있겠어?'라며 데이터를 제공하는 쿨한 성격! 하지만 당신의 개인정보는 무엇보다 소중합니다!", 
-               guide: "<h3>🔒 데이터 통제력 UP 가이드</h3><p>1. 앱이나 서비스 가입 시, 개인정보 처리방침을 꼭 읽어보기<br>2. 꼭 필요하지 않은 정보는 '선택' 항목이라면 제공하지 않기</p>" },
-        creative: { title: "⚠️창의적 활용 능력⚠️", text: "✨ 당신은 'AI 비서' 활용 타입! ✨</br> 문제를 해결할 때 AI를 즐겨 활용하는 당신! 하지만 AI는 당신의 창의력 또한 폭발시켜 줄 최고의 파트너입니다!",
-                   guide: "<h3>🎨 창의성 UP 가이드</h3><p>1. 전혀 다른 두 키워드를 조합해서 AI에게 새로운 아이디어를 생성시켜 보기.<br>2. AI의 결과물에 나만의 아이디어를 조합해서 발전시키기</p>" },
-        perfect: { text: "✨당신은 이미 '육각형 인간'!✨</br> AI를 다루는 당신의 능력은 완벽에 가깝습니다!", 
-                  guide: "<h3>🏆지금처럼!</h3><p>주체적으로 결정하고, 비판적으로 사고하며 윤리적인 결정까지 놓치지 않는, 창의적인 AI 활용 능력자! <br> 친구들에게도 좋은 AI 활용법을 알려주는 리더가 되어주세요!</p>" }
-    };
+               const resultsData = {
+    autonomy: { 
+        title: "✨ 당신은 'AI 조종사' 타입! ✨", 
+        text: "⚠️주체적 의사결정능력⚠️을 높여봐요!<br> AI라는 최첨단 비행기를 즐기나 가끔 자율주행에 너무 의존하는 편! 판단은 내가 직접 내려야해요!", 
+        guide: "", // 내용은 카드로 이동했습니다. (HTML 출력시 빈칸이 됩니다)
+        cards: [
+            { icon: "🎯", title: "목표 정하기", description: "AI 사용 전! 내가 진짜 원하는 것이 무엇인지 명확히 정의해요." },
+            { icon: "🤔", title: "검토하기", description: "아무리 멋진 AI의 답변이라도 그것이 내 상황에 맞는지 꼭 검토해요." },
+            { icon: "✍️", title: "스스로 선택하기", description: "추천 알고리즘에 의존하지 말고 최종 결정은 나의 가치관과 목표에 따라 직접 내려요." },
+            { icon: "🚀", title: "책임감 가지기", description: "내가 AI를 통해 내린 선택은 AI가 아닌 나의 책임이라는 것! 잊지말아요." }
+        ]
+    },
+    critical: { 
+        title: "✨ 당신은 '순수한 믿음'의 소유자! ✨", 
+        text: "⚠️비판적 사고력을 높여봐요!⚠️<br> AI의 말이라면 한국의 수도가 부산이라 해도 믿는 편! 하지만 AI의 답변에는 오류가 있을 수 있어요!",
+        guide: "",
+        cards: [
+            { icon: "🔍", title: "다른 출처와 비교하기", description: "AI가 제공한 정보를 신뢰할 수 있는 다른 출처와 비교해서 검증해요." },
+            { icon: "❓", title: "질문과 근거 함께 묻기", description: "AI에게 정보의 근거나 출처를 함께 요청해서, 그것이 믿을 만한지 확인해요." },
+            { icon: "⚖️", title: "다양한 관점 보기", description: "한 가지 답변보다 여러 AI나 사람에게 물어보고 다른 시각을 함께 살펴요." },
+            { icon: "🕵️‍♂️", title: "논리적으로 검토하기", description: "자연스럽고 그럴싸한 답변이라도 흐름이나 구조에 어색한 점은 없는지 확인해요." }
+        ]
+    },
+    ethics: { 
+        title: "✨ 당신은 '자유로운 영혼' 타입! ✨", 
+        text: "⚠️윤리적 판단력⚠️을 높여봐요!<br> 재미와 효율이 중요한 당신! 하지만 나의 AI 활용이 누군가에게 상처를 줄 수 있어요. 행동하기 전 '이래도 괜찮을까?' 생각해봐요!", 
+        guide: "",
+        cards: [
+            { icon: "©️", title: "저작권 존중하기", description: "AI로 만든 콘텐츠가 다른 사람의 저작권, 초상권을 침해하지 않는지 확인해요." },
+            { icon: "🤝", title: "동의 구하기", description: "친구 얼굴 합성이나 간단한 장난이라해도 반드시 본인의 동의를 받아요." },
+            { icon: "💭", title: "영향 고려하기", description: "내 행동이 다른 사람에게 미칠 영향을 먼저 생각하고 윤리적으로 판단해요." },
+            { icon: "🚀", title: "책임감 가지기", description: "내가 AI를 통해 내린 선택은 AI가 아닌 나의 책임이라는 것! 잊지말아요." }
+        ]
+    },
+    comms: { 
+        title: "✨ 당신은 '마음으로 말해요' 타입! ✨", 
+        text: "⚠️AI 소통능력⚠️을 높여봐요!<br> 툭 던지듯 말해도 AI가 찰떡같이 알아주길 바라는군요! 하지만 AI는 아직 당신의 마음을 읽지 못해요!", 
+        guide: "",
+        cards: [
+            { icon: "🎭", title: "역할 부여하기", description: "AI에게 '맞춤법을 교정하는 편집자', '단계별로 힌트를 주는 수학 선생님' 등 구체적인 역할을 추가해요." },
+            { icon: "📝", title: "구체적으로 요청하기", description: "'고등학생이 이해하도록','3줄로 요약해',같이 대상, 분량, 형식을 구체적으로 적어 명령하기." },
+            { icon: "🔄", title: "피드백하기", description: "AI 답변이 부족하다면 '예시를 더 보여줘', '두 번째 설명에서'등 어떤 부분을 부족한지, 무엇을 더 원하는지 피드백해요." },
+            { icon: "🗣️", title: "끈기 있게 대화하기", description: "단답형 질문보다는 반복적으로 질문을 정교화하며 내가 원하는 최상의 결과물 얻어요."}
+        ]
+    },
+    data: { 
+        title: "✨ 당신은 '쿨한 신뢰'의 소유자! ✨", 
+        text: "⚠️데이터 통제력⚠️을 높여봐요!<br> '무슨 일 있겠어?'라며 데이터를 제공하는 쿨한 성격! 하지만 당신의 개인정보는 무엇보다 소중합니다!", 
+        guide: "",
+        cards: [
+            { icon: "📋", title: "필수와 선택 구분하기", description: "회원가입 할 때 습관적인 '전체 동의'는 그만! 필요하지 않다면 '선택' 항목은 체크를 해제하세요." },
+            { icon: "🚫", title: "접근 권한 확인하기", description: "지도 앱도 아닌데 '위치 정보'를 요구한다고? 필요한 권한일지 의심하고 꼭 필요한 권한만 제공해요." },
+            { icon: "🗑️", title: "디지털 흔적 지우기", description: "더 이상 쓰지 않는 앱이나 서비스는 탈퇴해서 내 데이터가 떠돌아 다니지 않도록 주기적으로 정리해요." },
+            { icon: "🔒", title: "내 정보 철벽방어하기", description: "나와 친구의 사진, 연락처 등 개인정보를 함부로 AI나 앱에 입력하지 않아요." }
+        ]
+    },
+    creative: { 
+        title: "✨ 당신은 'AI 비서' 활용 타입! ✨", 
+        text: "⚠️창의적 활용 능력⚠️을 높여봐요!<br> 문제를 해결할 때 AI를 즐겨 활용하는 당신! 하지만 AI는 당신의 창의력 또한 폭발시켜 줄 최고의 파트너입니다!",
+        guide: "",
+        cards: [
+            { icon: "🌈", title: "새로운 조합 시도하기", description: "'조선시대'와 '사이버펑크'처럼 전혀 안 어울릴 것 같은 키워드를 섞어 신선한 아이디어를 요청해보세요." },
+            { icon: "✨", title: "나만의 터치 더하기", description: "AI가 만든 결과물에 나만의 문체, 경험을 더해 나만의 스타일로 발전시켜요." },
+            { icon: "🎪", title: "다른 시각을 불러오기", description: "AI와 대화하며 평소 나라면 생각하지 못했을 것 같은 새로운 시각으로 해결방법을 찾아봐요." },
+            { icon: "🎨", title: "장르 바꾸기", description: "소설을 뉴스 기사로, 교과서 내용을 랩으로 내 고민을 그림으로! 새로운 장르로 변주해봐요." }
+        ]
+    },
+    perfect: { 
+        title: "✨당신은 이미 '육각형 인간'!✨",
+        text: "AI를 다루는 당신의 능력은 완벽에 가깝습니다!", 
+        guide: "",
+        cards: [
+            { icon: "🗓️", title: "나만의 AI 루틴 세우기", description: "복잡한 시험 일정 관리, 여행 계획, 노트 정리 등 반복되는 일상에서 AI를 적극 활용해봐요." },
+            { icon: "🤝", title: "AI 꿀팁 전수하기", description: "AI 사용을 어려워하는 친구, 가족에게 나만의 유용한 프롬프트 작성 팁이나 유용한 툴을 전수해주세요!" },
+            { icon: "🌍", title: "모두를 위한 AI 만들기", description: "학교나 동아리, 지역사회의 문제를 해결하는 아이디어를 AI와 함께 구상해보고 선한 영향력을 발휘해요." },
+            { icon: "🏆", title: "AI 리더로 앞장서기", description: "AI를 비판적이고 윤리적으로 활용하는 모습을 통해 AI가 가진 멋지고 새로운 영향력을 보여주세요!" }
+        ]
+    }
+};
   
   
     // 설문조사에서 응답한 것에 해설 및 설명이 될 수 있도록 연결되는 내용으로 퀴즈 추가
@@ -335,30 +399,113 @@ const quizQuestions = [
         }
     }
     
-   // 결과 페이지를 표시하는 새로운 함수
-    function showResults() {
-        let lowestScore = Infinity;
-        let lowestKey = '';
-        for (const key in userScores) {
-            if (userScores[key] < lowestScore) {
-                lowestScore = userScores[key];
-                lowestKey = key;
-            }
-        }
+    //  --- 결과페이지 [추가] 카드 미션 관련 변수 ---
+let selectedCards = new Set(); // 클릭한 카드 인덱스 저장
+const totalCards = 4; // 목표 카드 수
 
-        if (lowestScore >= 7) {
-            resultText.innerHTML = resultsData.perfect.text;
-            guidelines.innerHTML = resultsData.perfect.guide;
-        } else {
-            resultText.innerHTML = resultsData[lowestKey].text;
-            guidelines.innerHTML = resultsData[lowestKey].guide;
+function showResults() {
+    let lowestScore = Infinity;
+    let lowestKey = '';
+    
+    // 1. 최저점 찾기
+    for (const key in userScores) {
+        if (userScores[key] < lowestScore) {
+            lowestScore = userScores[key];
+            lowestKey = key;
         }
-
-        drawChart(resultChartCanvas, Object.values(userScores), false);
-        
-        pages.survey.style.display = 'none';
-        pages.result.style.display = 'flex';
     }
+    
+    // 2. 데이터 가져오기 (perfect 처리 포함)
+    let dataKey = (lowestScore >= 7) ? 'perfect' : lowestKey;
+    const data = resultsData[dataKey];
+    
+    // 3. 텍스트 및 차트 렌더링
+if (resultTitle) resultTitle.innerHTML = data.title; // 제목
+    if (resultText) resultText.innerHTML = data.text;    // 본문
+    drawChart(resultChartCanvas, Object.values(userScores), false);
+
+    // 4. [추가] 카드 미션 렌더링 시작
+    renderMissionCards(data.cards);
+    
+    // 5. 페이지 전환
+    pages.survey.style.display = 'none';
+    pages.result.style.display = 'flex';
+}  
+  
+// --- [추가] 카드 렌더링 및 인터랙션 함수들 ---
+function renderMissionCards(cardsData) {
+    const cardsGrid = document.getElementById('mission-cards-grid');
+    const missionBtn = document.getElementById('mission-complete-btn');
+    const progressFill = document.getElementById('mission-progress-fill');
+    const progressText = document.getElementById('mission-progress-text');
+
+    // 초기화
+    cardsGrid.innerHTML = '';
+    selectedCards.clear();
+    missionBtn.disabled = true;
+    missionBtn.innerText = "에너지를 모두 충전해주세요! (0/4)";
+    progressFill.style.width = '0%';
+    progressText.innerText = '0/4';
+
+    // 카드 생성
+    cardsData.forEach((card, index) => {
+        const cardEl = document.createElement('div');
+        cardEl.className = 'mission-card';
+        cardEl.innerHTML = `
+            <div class="card-icon">${card.icon}</div>
+            <div class="card-title">${card.title}</div>
+            <div class="card-desc">${card.description}</div>
+        `;
+        
+        // 클릭 이벤트
+        cardEl.addEventListener('click', () => {
+            if (selectedCards.has(index)) return; // 이미 클릭했으면 무시
+            
+            selectedCards.add(index);
+            cardEl.classList.add('selected');
+            
+            // 반짝임 효과
+            createCardSparkles(cardEl);
+            
+            // 진행도 업데이트
+            const count = selectedCards.size;
+            const percent = (count / totalCards) * 100;
+            progressFill.style.width = `${percent}%`;
+            progressText.innerText = `${count}/${totalCards}`;
+            
+            if (count === totalCards) {
+                missionBtn.disabled = false;
+                missionBtn.innerText = "🚀 에너지 충전 완료! 퀴즈 풀러 가기";
+                missionBtn.classList.add('pulse-animation'); // 버튼 강조 애니메이션
+            } else {
+                missionBtn.innerText = `에너지를 모두 충전해주세요! (${count}/3)`;
+            }
+        });
+        
+        cardsGrid.appendChild(cardEl);
+    });
+}
+
+// 반짝임 효과 (CSS animation 활용)
+function createCardSparkles(element) {
+    for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'card-sparkle';
+        
+        // 랜덤 위치 및 방향 계산
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 60 + Math.random() * 40;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+        
+        sparkle.style.setProperty('--tx', `${tx}px`);
+        sparkle.style.setProperty('--ty', `${ty}px`);
+        
+        element.appendChild(sparkle);
+        
+        setTimeout(() => sparkle.remove(), 600);
+    }
+}
 
     function selectChoice(scores) {
         answerHistory.push(scores); //점수 기록
@@ -448,7 +595,11 @@ const quizQuestions = [
             }, 600); // 0.6초 후 효과 제거
         }
     }
-    
+ // --- 여기까지 업데이트 한 결과 페이지 1221 ---  
+ 
+// 가이드 확인 후 퀴즈로 넘어가기
+
+  
   
 // 해설 페이지를 보여주는 함수
 function showExplanation() {
@@ -511,22 +662,63 @@ if (introChartCanvas) {
     }, 1000); // 500ms = 0.5초
 }
 
-  // 이벤트 리스너 연결
-    // [시작하기] (인트로 -> 설문)
-    startBtn.addEventListener('click', () => {
-        pages.intro.style.display = 'none';
-        pages.survey.style.display = 'flex';  //
-        loadQuestion();
-    });
+
+ // --- 4. 이벤트 리스너 연결 (수정된 버전) ---
+
+    // [시작하기] 버튼 클릭
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            // 인트로 차트 애니메이션 멈추기 (리소스 낭비 방지)
+            if (introAnimationInterval) clearInterval(introAnimationInterval);
+
+            pages.intro.style.display = 'none';
+            pages.survey.style.display = 'flex';
+            loadQuestion();
+        });
+    }
   
-    backBtn.addEventListener('click', goBack);
+    // [이전 단계] 버튼
+    if (backBtn) {
+        backBtn.addEventListener('click', goBack);
+    }
+
+    // [미션 완료 후 -> 퀴즈 풀러 가기] (Code A의 핵심 기능 연결)
+    if (missionCompleteBtn) {
+        missionCompleteBtn.addEventListener('click', () => {
+            pages.result.style.display = 'none';
+            pages.quiz.style.display = 'flex';
+            startQuiz(); 
+        });
+    }
     
-    // [실전 퀴즈 풀러가기] 
+  // [다음 문제로]
+    if (nextQuizBtn) {
+        nextQuizBtn.addEventListener('click', loadNextQuiz);
+    }
+
+    // [퀴즈 완료]
+    if (completeQuizBtn) {
+        completeQuizBtn.addEventListener('click', () => {
+            pages.quiz.style.display = 'none';
+            pages.final.style.display = 'flex';
+        });
+    }
+
+});
+    /* [실전 퀴즈 풀러가기] 삭제 후 아래로 교체 1221
     goToQuizBtn.addEventListener('click', () => {
-        pages.result.style.display = 'none';
+        pages..style.display = 'none';
         pages.quiz.style.display = 'flex';
         startQuiz();
-    }); 
+    });
+      가이드 확인 후 > 실전 퀴즈 풀러가기
+   missionCompleteBtn.addEventListener('click', () => {
+    pages.result.style.display = 'none';
+    pages.quiz.style.display = 'flex';
+    startQuiz(); // 퀴즈 시작 함수 호출
+  }
+  
+  
     // [다음 문제로]
      nextQuizBtn.addEventListener('click', loadNextQuiz);
    
@@ -534,13 +726,13 @@ if (introChartCanvas) {
     completeQuizBtn.addEventListener('click', () => {
         pages.quiz.style.display = 'none';
         pages.final.style.display = 'flex';
-    });
+    }
   
-  
-    // [나의 결과 다운로드하기] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
+      });
+    // [나의 결과 다운로드하기] 보류
     /*
     downloadBtn.addEventListener('click', () => {
         alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
     });
     */
-  });
+ 
