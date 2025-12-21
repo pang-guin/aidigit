@@ -176,14 +176,66 @@ button:hover {
 }
 
 #start-btn {
+    /* 기존 스타일 유지 */
     padding: 15px 50px;
     font-size: 1.2rem;
     background: linear-gradient(90deg, #17a1b9 0%, #830093 100%);
     border-radius: 30px;
+    color: white; /* 텍스트가 잘 보이도록 흰색 추가 권장 */
+    border: none; /* 기본 테두리 제거 권장 */
+    cursor: pointer;
+
+    /* 반짝임 효과를 위한 필수 설정 */
+    position: relative; /* 가상 요소의 위치 기준점 */
+    overflow: hidden;   /* 버튼 밖으로 나가는 빛을 숨김 */
+
+/* [추가됨] 그림자 설정: X축 Y축 흐림정도 색상(투명도) */
+    /* 버튼의 보라색(#830093)과 비슷한 톤으로 그림자를 주어 자연스럽게 만듦 */
+    box-shadow: 0 5px 15px rgba(131, 0, 147, 0.4);
+
+    /* [추가됨] 마우스 올렸을 때 부드러운 움직임을 위함 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* [추가됨] 마우스를 올렸을 때 버튼이 살짝 뜨는 효과 */
 #start-btn:hover {
-    background-color: #0056b3;
+    transform: translateY(-3px); /* 위로 3px 이동 */
+    box-shadow: 0 8px 25px rgba(131, 0, 147, 0.6); /* 그림자가 더 넓고 진해짐 */
 }
+/* 빛이 지나가는 효과 (가상 요소) */
+#start-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%; /* 버튼 왼쪽 바깥에서 시작 */
+    width: 100%;
+    height: 100%;
+    
+    /* 투명 -> 흰색 반투명 -> 투명으로 이어지는 그라데이션 */
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent
+    );
+    
+    /* 빛을 약간 기울임 */
+    transform: skewX(-20deg);
+    
+    /* 애니메이션 적용 (3초마다 반복) */
+    animation: shine 3s infinite;
+}
+
+/* 빛이 왼쪽에서 오른쪽으로 이동하는 애니메이션 */
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    50%, 100% {
+        left: 200%; /* 버튼 오른쪽 끝까지 이동 후 대기 */
+    }
+}
+
 
 #back-btn {
     background-color: #a0c4ff; /* 흐린 하늘색 */
