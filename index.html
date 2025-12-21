@@ -35,7 +35,7 @@
     </div>
 
     <div id="result-page" style="display:none;">
-        <h2>나의 AI 능력치 분석 결과</h2>
+        <h2 id="main-title">🎯나의 AI 능력 분석결과</h2>
         <div class="chart-container">
             <svg viewBox="0 0 200 200">
                 <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
@@ -43,10 +43,27 @@
             </svg>
             <canvas id="resultRadarChart"></canvas>
         </div>
-        <div id="result-text"></div>
-        <div id="guidelines"></div>
-        <button id="go-to-quiz-btn">실전 퀴즈 풀러가기</button>
+       <div class="result-box">
+<div id="result-title" class="result-title"></div>
+    <div id="result-text" class="result-message"></div>
+         </div>         
+      <div class="mission-section">
+        <h3>⚡나에게 필요한 에너지 가이드</h3>
+        <p class="mission-instruction">아래 카드를 눌러 부족한 에너지를 확인해주세요!</p>
+        
+        <div class="mission-progress-container">
+            <div class="mission-label">충전율: <span id="mission-progress-text">0/4</span></div>
+            <div class="mission-track">
+                <div id="mission-progress-fill" class="mission-fill"></div>
+            </div>
+        </div>
+
+        <div id="mission-cards-grid" class="cards-grid"></div>
+
+        <button id="mission-complete-btn" class="complete-button" disabled>에너지를 모두 충전해주세요! (0/4)</button>
     </div>
+    
+     </div>
 
   <div id="quiz-page" style="display:none;">
         <h2>실전! 능력 강화 퀴즈</h2>
