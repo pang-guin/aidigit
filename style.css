@@ -30,7 +30,7 @@ body {
 }
 
 /* --- 페이지별 레이아웃 설정 --- */
-#survey-page, #result-page, #quiz-page, #final-page, #explanation-page {
+#survey-page, #result-page, #quiz-page, #explanation-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,6 +40,7 @@ body {
     padding: 2rem 1rem;
     box-sizing: border-box;
 }
+
 #intro-page {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 32px;
@@ -59,6 +60,97 @@ body {
     backdrop-filter: blur(10px);
     animation: fadeIn 0.8s ease-out;
 }
+
+body.final-page-active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 전체 화면을 덮도록 설정 */
+    min-height: 100vh;
+    margin: 0; /* 기본 마진 제거 */
+}
+
+  #final-page {         
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-in;
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+           flex-direction: column; 
+           justify-content: center;
+           align-items: center;
+           gap: 10px;
+        }
+
+@keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+  #sparkling-hexagon {
+            font-size: 80px;
+            animation: sparkleRotate 3s ease-in-out infinite;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes sparkleRotate {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+        }
+
+#final-page h2 {
+    color: #ffffff;
+    font-size: 48px;
+    margin: 20px 0;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+
+ @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+            to { text-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 182, 255, 0.6); }
+        }
+
+ #final-page p {
+            color: #ffffff;
+            font-size: 24px;
+            margin: 20px 0 40px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+#final-page .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+#final-page .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+           #final-page h2 { font-size: 36px; }
+           #final-page p { font-size: 18px; }
+          #final-page #sparkling-hexagon { font-size: 60px; }
+        }
 
 
 /* --- 공통 요소 반응형 스타일 --- */
@@ -439,4 +531,18 @@ svg { z-index: 0; }
      
     margin-bottom: 20px;
     padding: 0 10px;            /* 좌우 여백을 살짝 주어 답답함 해소 */
+}
+
+/* 해설 강조 키워드 디자인 */
+.keyword-badge {
+    display: inline-block;
+    background-color: #d7f5eb; /* 연한 분홍 배경 */
+    color: #07a362;            /* 진한 분홍 글자 */
+    padding: 5px 15px;         /* 안쪽 여백 */
+    border-radius: 20px;       /* 둥근 모서리 */
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    border: 1px solid #d7f5e; /* 테두리 살짝 */
+    box-shadow: 0 2px 5px rgba(228, 245, 239, 0.1);
 }
