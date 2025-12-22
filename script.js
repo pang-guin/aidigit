@@ -527,31 +527,43 @@ function createCardSparkles(element) {
 }
 
    function selectChoice(scores) {
-    // 0) 즉시 선택 UI 제거 (잔상/포커스 제거용)
+    // 1) 중복 클릭 방지 (버튼 비활성화)
     if (choicesContainer) {
-        // 선택지들 즉시 제거해서 이전 버튼이 보이지 않게 함
-        choicesContainer.innerHTML = '';
-        // 포커스 제거 (브라우저가 버튼을 계속 강조하는 경우 방지)
-        if (document.activeElement) document.activeElement.blur();
-        // 클릭 중복 방지: 컨테이너 비활성화
-        choicesContainer.style.pointerEvents = 'none';
+        choicesContainer.style.pointerEvents = 'none'; 
     }
-    // 1) 점수 기록
+
+    // 2) 점수 기록
     answerHistory.push(scores);
     for (const key in scores) {
         userScores[key] += scores[key];
     }
-    // 2) 짧은 지연 후 다음 질문 로드 (사용자에게 클릭 피드백 보일 시간)
+
+    // 3) [핵심] "은은하게" 사라지기 (CSS 클래스 추가)
+    // 질문과 선택지 영역을 투명하게 만듭니다.
+    questionText.classList.add('fade-out');
+    choicesContainer.classList.add('fade-out');
+
+    // 4) 0.3초(300ms) 뒤에 내용 교체하고 다시 나타나기
+    // (CSS transition 시간과 맞춰주는 게 자연스럽습니다)
     setTimeout(() => {
-        // 컨테이너 인터랙션 복원
-        if (choicesContainer) choicesContainer.style.pointerEvents = '';
         currentQuestionIndex++;
+        
         if (currentQuestionIndex < questions.length) {
+            // 다음 질문 로드 (이때 내용이 바뀜)
             loadQuestion();
+            
+            // 내용이 바뀌었으니 다시 보이게 하기 (fade-out 제거)
+            questionText.classList.remove('fade-out');
+            choicesContainer.classList.remove('fade-out');
+            
+            // 버튼 클릭 다시 가능하게 풀기
+            if (choicesContainer) choicesContainer.style.pointerEvents = 'auto';
+            
         } else {
+            // 결과 페이지로 이동
             showResults();
         }
-    }, 150); // 150ms: 필요하면 0~300 범위에서 조절
+    }, 300); // 300ms = 0.3초 (CSS 시간과 동일하게 설정)
 }
   
   function goBack() {
