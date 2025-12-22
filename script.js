@@ -326,9 +326,9 @@ const quizQuestions = [
     // --- 3. 핵심 기능 함수들 ---          
     // 질문을 화면에 표시하는 함수
     function loadQuestion() {
-      // 진행바 업데이트
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-    surveyProgressBar.style.width = `${progress}%`;
+        // 진행바 업데이트
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        surveyProgressBar.style.width = `${progress}%`;
         // 현재 질문 데이터를 가져옴
         const currentQuestion = questions[currentQuestionIndex];
         questionText.innerText = currentQuestion.question;
@@ -526,32 +526,43 @@ function createCardSparkles(element) {
     }
 }
 
-    function selectChoice(scores) {
-        answerHistory.push(scores); //점수 기록
-        
-        for (const key in scores) {
-            userScores[key] += scores[key];
-        }
+   function selectChoice(scores) {
+    // 0) 즉시 선택 UI 제거 (잔상/포커스 제거용)
+    if (choicesContainer) {
+        // 선택지들 즉시 제거해서 이전 버튼이 보이지 않게 함
+        choicesContainer.innerHTML = '';
+        // 포커스 제거 (브라우저가 버튼을 계속 강조하는 경우 방지)
+        if (document.activeElement) document.activeElement.blur();
+        // 클릭 중복 방지: 컨테이너 비활성화
+        choicesContainer.style.pointerEvents = 'none';
+    }
+    // 1) 점수 기록
+    answerHistory.push(scores);
+    for (const key in scores) {
+        userScores[key] += scores[key];
+    }
+    // 2) 짧은 지연 후 다음 질문 로드 (사용자에게 클릭 피드백 보일 시간)
+    setTimeout(() => {
+        // 컨테이너 인터랙션 복원
+        if (choicesContainer) choicesContainer.style.pointerEvents = '';
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
             loadQuestion();
         } else {
             showResults();
         }
-    }
+    }, 150); // 150ms: 필요하면 0~300 범위에서 조절
+}
   
   function goBack() {
     // 1. 히스토리에서 마지막 답변의 점수를 가져오고 배열에서 제거.
     const lastScores = answerHistory.pop();
-
     // 2. 마지막에 더했던 점수를 다시 빼서 점수를 원상 복구
     for (const key in lastScores) {
         userScores[key] -= lastScores[key];
     }
-
     // 3. 질문 번호를 하나 뒤로 돌립니다.
     currentQuestionIndex--;
-
     // 4. 이전 질문을 다시 화면에 로드합니다.
     loadQuestion();
     }  
