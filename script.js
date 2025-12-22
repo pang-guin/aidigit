@@ -527,10 +527,8 @@ function createCardSparkles(element) {
 }
 
    function selectChoice(scores) {
-    // 1) 중복 클릭 방지 (버튼 비활성화)
-    if (choicesContainer) {
-        choicesContainer.style.pointerEvents = 'none'; 
-    }
+    // 1) 클릭 막기 (중복 방지)
+    if (choicesContainer) choicesContainer.style.pointerEvents = 'none';
 
     // 2) 점수 기록
     answerHistory.push(scores);
@@ -538,32 +536,33 @@ function createCardSparkles(element) {
         userScores[key] += scores[key];
     }
 
-    // 3) [핵심] "은은하게" 사라지기 (CSS 클래스 추가)
-    // 질문과 선택지 영역을 투명하게 만듭니다.
+    // 3) 사라지기 시작 (0.3초 동안)
     questionText.classList.add('fade-out');
     choicesContainer.classList.add('fade-out');
 
-    // 4) 0.3초(300ms) 뒤에 내용 교체하고 다시 나타나기
-    // (CSS transition 시간과 맞춰주는 게 자연스럽습니다)
+    // 4) [첫 번째 기다림] 완전히 투명해질 때까지 300ms 대기
     setTimeout(() => {
         currentQuestionIndex++;
-        
+
         if (currentQuestionIndex < questions.length) {
-            // 다음 질문 로드 (이때 내용이 바뀜)
-            loadQuestion();
+            // 안 보이는 상태에서 내용 교체!
+            loadQuestion(); 
             
-            // 내용이 바뀌었으니 다시 보이게 하기 (fade-out 제거)
-            questionText.classList.remove('fade-out');
-            choicesContainer.classList.remove('fade-out');
-            
-            // 버튼 클릭 다시 가능하게 풀기
-            if (choicesContainer) choicesContainer.style.pointerEvents = 'auto';
-            
+            // 5) [두 번째 기다림 - 핵심!] 
+            // 내용이 교체되자마자 바로 보여주면 깜빡일 수 있음.
+            // 브라우저가 새 버튼을 그릴 시간(50ms)을 아주 조금 더 줍니다.
+            setTimeout(() => {
+                questionText.classList.remove('fade-out');
+                choicesContainer.classList.remove('fade-out');
+                
+                // 클릭 다시 허용
+                if (choicesContainer) choicesContainer.style.pointerEvents = 'auto';
+            }, 50); // 0.05초 추가 대기
+
         } else {
-            // 결과 페이지로 이동
             showResults();
         }
-    }, 300); // 300ms = 0.3초 (CSS 시간과 동일하게 설정)
+    }, 300); // CSS transition 시간과 동일
 }
   
   function goBack() {
