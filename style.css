@@ -617,3 +617,14 @@ svg { z-index: 0; }
         max-width: 280px; /* 너무 커지지 않게 제한 */
     }
 }
+
+/* 질문 텍스트와 버튼 컨테이너에 부드러운 전환 효과(transition) */
+#question-text, #choices-container {
+    opacity: 1; /* 기본은 잘 보임 */
+    transition: opacity 0.3s ease-in-out; /* 0.3초 동안 부드럽게 변함 */
+}
+
+/* 숨길 때 사용할 클래스 */
+.fade-out {
+    opacity: 0 !important; /* 투명하게 만듦 */
+}
