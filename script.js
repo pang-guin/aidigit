@@ -1,8 +1,8 @@
-// HTML 문서가 완전히 로드되었을 때 전체 코드가 실행토록 함. 물론 현재 html의 <body> 맨 아래에 <script>를 넣어놔서 스크립트가 html보다 먼저 실행되는 오류는 없음.
+// 안전장치 HTML 문서가 완전히 로드되었을 때 자바 코드가 실행토록 함. 물론 현재 html의 <body> 맨 아래에 <script>를 넣어놔서 스크립트가 html보다 먼저 실행되는 오류는 없음.
 document.addEventListener('DOMContentLoaded', () => {
-  // 변수 주체성 : autonomy: 5, 비판력 : critical 윤리 : ethics: 소통력 : comms 데이터통제력: data 창의성 : creative
-  
-  const particlesContainer = document.getElementById('particles');
+
+  // 변수 1) 주체성 : autonomy: 2) 비판력 : critical 3) 윤리 : ethics: 4) 소통력 : comms 5) 데이터통제력: data 6) 창의성 : creative
+    const particlesContainer = document.getElementById('particles');
     // particlesContainer가 있을 때만 실행 (오류 방지)
     if (particlesContainer) {
         for (let i = 0; i < 20; i++) {
@@ -213,10 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     }
 };
-  
-  
-    // 설문조사에서 응답한 것에 해설 및 설명이 될 수 있도록 연결되는 내용으로 퀴즈 추가
-// 설문조사에서 응답한 것에 해설 및 설명이 될 수 있도록 연결되는 내용으로 퀴즈 추가
 
 // 설문조사에서 응답한 것에 해설 및 설명이 될 수 있도록 연결되는 내용으로 퀴즈 추가
 const quizQuestions = [
@@ -682,7 +678,7 @@ if (introChartCanvas) {
             introChartInstance.data.datasets[0].data = randomData;
             introChartInstance.update(); // 부드럽게 차트를 다시 그림
         }
-    }, 1000); // 500ms = 0.5초
+    }, 1000); // 1초마다 랜덤 그래프 변경
 }
 
   
@@ -731,34 +727,4 @@ if (introChartCanvas) {
     }
 
 });
-    /* [실전 퀴즈 풀러가기] 삭제 후 아래로 교체 1221
-    goToQuizBtn.addEventListener('click', () => {
-        pages..style.display = 'none';
-        pages.quiz.style.display = 'flex';
-        startQuiz();
-    });
-      가이드 확인 후 > 실전 퀴즈 풀러가기
-   missionCompleteBtn.addEventListener('click', () => {
-    pages.result.style.display = 'none';
-    pages.quiz.style.display = 'flex';
-    startQuiz(); // 퀴즈 시작 함수 호출
-  }
-  
-  
-    // [다음 문제로]
-     nextQuizBtn.addEventListener('click', loadNextQuiz);
-   
-    // [퀴즈 완료] 버튼도 아직 기능 연결 전이므로 전체 주석 처리
-    completeQuizBtn.addEventListener('click', () => {
-        pages.quiz.style.display = 'none';
-        pages.final.style.display = 'flex';
-    }
-  
-      });
-    // [나의 결과 다운로드하기] 보류
-    /*
-    downloadBtn.addEventListener('click', () => {
-        alert("다운로드 기능은 'html2canvas' 라이브러리를 추가해야 구현할 수 있습니다.");
-    });
-    */
  
