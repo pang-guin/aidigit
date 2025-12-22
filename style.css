@@ -40,6 +40,10 @@ body {
     box-sizing: border-box;
 }
 
+#survey-page { 
+    min-height: 400px; /* 다음문제 넘어갈때 지워도 화면 찌그러지듯 깜박이는거 방지 */
+}
+
 #intro-page {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 32px;
@@ -86,7 +90,7 @@ body.final-page-active {
         }
 
 
-  #sparkling-hexagon {
+ #sparkling-hexagon {
             font-size: 80px;
             animation: sparkleRotate 3s ease-in-out infinite;
             margin-bottom: 20px;
@@ -299,6 +303,8 @@ svg { z-index: 0; }
 /* 서베이의 #question-text와 퀴즈의 #quiz-question-container를 카드 형태로 통일 */
 #question-text,
 #quiz-question-container {
+    opacity: 1;
+    transition: opacity 0.3s ease;
     white-space: pre-wrap; /* \n을 줄바꿈으로 인식함 */
     background-color: #ffffff;
     width: 100%;
@@ -617,11 +623,6 @@ svg { z-index: 0; }
     }
 }
 
-/* 질문 텍스트와 버튼 컨테이너에 부드러운 전환 효과(transition) */
-#question-text, #choices-container {
-    opacity: 1; /* 기본은 잘 보임 */
-    transition: opacity 0.3s ease-in-out; /* 0.3초 동안 부드럽게 변함 */
-}
 
 /* 숨길 때 사용할 클래스 */
 .fade-out {
