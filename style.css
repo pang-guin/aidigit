@@ -158,7 +158,7 @@ body.final-page-active {
 
 /* --- 공통 요소 반응형 스타일 --- */
 h1 { font-size: var(--font-size-h1); margin-bottom: 15px; }
-h2 { font-size: var(--font-size-h2);  margin: 1;
+h2 { font-size: var(--font-size-h2);  margin: 0;
     padding: 0; }
 p { font-size: var(--font-size-p); line-height: 1.5; color: #0f0f0f; }
 
