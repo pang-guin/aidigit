@@ -23,6 +23,24 @@ body {
 }
 
 /* --- 페이지별 레이아웃 설정 --- */
+#intro-page {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 32px;
+    
+    /* [수정] Flexbox 활성화 및 방향 설정 */
+    display: flex;             
+    flex-direction: column;       
+    justify-content: center;
+    align-items: center;        
+    padding: 48px 40px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.8s ease-out;
+}
+
 #survey-page, #result-page, #quiz-page, #explanation-page {
     display: flex;
     flex-direction: column;
@@ -38,63 +56,41 @@ body {
     min-height: 400px; /* 다음문제 넘어갈때 지워도 화면 찌그러지듯 깜박이는거 방지 */
 }
 
-#intro-page {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 32px;
-    
-    /* [수정] Flexbox 활성화 및 방향 설정 */
-    display: flex;             /* 이게 있어야 아래 정렬 속성이 먹힙니다 */
-    flex-direction: column;    /* 요소들을 세로로 배치 */
-    
-    justify-content: center;
-    align-items: center;       /* 자식 요소(차트 포함)를 가로 중앙 정렬 */
-    
-    padding: 48px 40px;
-    max-width: 480px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    animation: fadeIn 0.8s ease-out;
-}
-
 body.final-page-active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* 전체 화면을 덮도록 설정 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 전체 화면을 덮도록 설정 */
     min-height: 100vh;
     margin: 0; /* 기본 마진 제거 */
 }
 
-  #final-page {         
-            text-align: center;
-            padding: 40px 20px;
-            animation: fadeIn 1s ease-in;
-            max-width: 600px;
-            width: 100%;
-            display: flex;
-           flex-direction: column; 
-           justify-content: center;
-           align-items: center;
-           gap: 10px;
-        }
+#final-page {         
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeIn 1s ease-in;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
-@keyframes fadeIn {
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
+}
 
-
- #sparkling-hexagon {
+#sparkling-hexagon {
             font-size: 80px;
             animation: sparkleRotate 3s ease-in-out infinite;
             margin-bottom: 20px;
             filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
-        }
+}
 
         @keyframes sparkleRotate {
             0%, 100% { transform: rotate(0deg) scale(1); }
             50% { transform: rotate(180deg) scale(1.2); }
-        }
+}
 
 #final-page h2 {
     color: #ffffff;
@@ -104,11 +100,10 @@ body.final-page-active {
     animation: glow 2s ease-in-out infinite alternate;
 }
 
-
- @keyframes glow {
+        @keyframes glow {
             from { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
             to { text-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 182, 255, 0.6); }
-        }
+}
 
  #final-page p {
             color: #ffffff;
@@ -116,8 +111,6 @@ body.final-page-active {
             margin: 20px 0 40px 0;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-
-
 
 #final-page .floating-particles {
             position: fixed;
@@ -149,13 +142,10 @@ body.final-page-active {
           #final-page #sparkling-hexagon { font-size: 60px; }
         }
 
-
 /* --- 공통 요소 반응형 스타일 --- */
 h1 { font-size: var(--font-size-h1); margin-bottom: 15px; }
-h2 { font-size: var(--font-size-h2);  margin: 0;
-    padding: 0; }
+h2 { font-size: var(--font-size-h2);  margin: 0; padding: 0; }
 p { font-size: var(--font-size-p); line-height: 1.5; color: #0f0f0f; }
-
 button {
     padding: 0.8em 1.5em;
     font-size: var(--font-size-button);
@@ -178,63 +168,48 @@ button:hover {
     font-size: 1.2rem;
     background: linear-gradient(90deg, #17a1b9 0%, #830093 100%);
     border-radius: 30px;
-    color: white; /* 텍스트가 잘 보이도록 흰색 추가 권장 */
-    border: none; /* 기본 테두리 제거 권장 */
-    cursor: pointer;
-
-    /* 반짝임 효과를 위한 필수 설정 */
-    position: relative; /* 가상 요소의 위치 기준점 */
-    overflow: hidden;   /* 버튼 밖으로 나가는 빛을 숨김 */
-
-/* [추가됨] 그림자 설정: X축 Y축 흐림정도 색상(투명도) */
-    /* 버튼의 보라색(#830093)과 비슷한 톤으로 그림자를 주어 자연스럽게 만듦 */
+    color: white; 
+    border: none; 
+    cursor: pointer;  
+    position: relative; 
+    overflow: hidden;  
     box-shadow: 0 5px 15px rgba(131, 0, 147, 0.4);
-
-    /* [추가됨] 마우스 올렸을 때 부드러운 움직임을 위함 */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* [추가됨] 마우스를 올렸을 때 버튼이 살짝 뜨는 효과 */
 #start-btn:hover {
-    transform: translateY(-3px); /* 위로 3px 이동 */
-    box-shadow: 0 8px 25px rgba(131, 0, 147, 0.6); /* 그림자가 더 넓고 진해짐 */
+    transform: translateY(-3px); 
+    box-shadow: 0 8px 25px rgba(131, 0, 147, 0.6); 
 }
-/* 빛이 지나가는 효과 (가상 요소) */
+
 #start-btn::after {
     content: "";
     position: absolute;
     top: 0;
-    left: -100%; /* 버튼 왼쪽 바깥에서 시작 */
+    left: -100%; 
     width: 100%;
     height: 100%;
-    
-    /* 투명 -> 흰색 반투명 -> 투명으로 이어지는 그라데이션 */
     background: linear-gradient(
         90deg, 
         transparent, 
         rgba(255, 255, 255, 0.2), 
         transparent
-    );
-    
-    /* 빛을 약간 기울임 */
-    transform: skewX(-20deg);
-    
-    /* 애니메이션 적용 (3초마다 반복) */
+    );    
+    transform: skewX(-20deg);    
     animation: shine 3s infinite;
 }
 
-/* 빛이 왼쪽에서 오른쪽으로 이동하는 애니메이션 */
 @keyframes shine {
     0% {
         left: -100%;
     }
     50%, 100% {
-        left: 200%; /* 버튼 오른쪽 끝까지 이동 후 대기 */
+        left: 200%; 
     }
 }
 
 #back-btn:hover {
-    background-color: #8da0cb; /* 마우스를 올렸을 때 조금 더 진한 색 */
+    background-color: #8da0cb; 
 }
 
 /* --- 차트 스타일 --- */
@@ -243,7 +218,7 @@ button:hover {
     width: 90vw;
     max-width: 400px;
     aspect-ratio: 1 / 1;
-    margin-bottom: 1rem; /* 차트와 텍스트 사이 간격 추가 */
+    margin-bottom: 1rem; 
 }
 
 svg, canvas {
@@ -262,19 +237,16 @@ svg { z-index: 0; }
 .sparkle { fill: white; opacity: 0; animation: sparkle 2s infinite; }
 @keyframes sparkle { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-/* =========================================
-   [통합 스타일] 서베이(Survey) & 퀴즈(Quiz)
-   ========================================= */
 
 /* 1. 진행바 (Progress Bar) - 공통 스타일 */
 #survey-progress-container,
 #progress-bar-container {
     width: 100%;
     max-width: 100%;
-    height: 10px;           /* 얇고 세련된 두께 */
-    background-color: #f3f4f6; /* 아주 연한 회색 배경 */
-    border-radius: 20px;    /* 둥근 끝 */
-    margin-bottom: 30px;    /* 질문 박스와의 간격 */
+    height: 10px;         
+    background-color: #f3f4f6; 
+    border-radius: 20px;    
+    margin-bottom: 30px;  
     overflow: hidden;
 }
 
@@ -282,14 +254,12 @@ svg { z-index: 0; }
 #progress-bar {
     height: 100%;
     width: 0%;
-    /* 이미지와 유사한 보라~핑크 그라데이션 */
     background: linear-gradient(90deg, #8b5cf6 0%, #d946ef 100%);
     border-radius: 20px;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 2. 질문 박스 (Card Design) - 공통 스타일 */
-/* 서베이의 #question-text와 퀴즈의 #quiz-question-container를 카드 형태로 통일 */
 #question-text,
 #quiz-question-container {
     opacity: 1;
@@ -300,21 +270,16 @@ svg { z-index: 0; }
     box-sizing: border-box;
     padding: 40px 30px;     /* 넉넉한 내부 여백 */
     border-radius: 24px;    /* 부드러운 모서리 */
-    margin: 0 0 24px 0;     /* 아래쪽 선택지와의 간격 */
-    
-    /* [핵심] 이미지와 같은 부드러운 그림자 효과 */
+    margin: 0 0 24px 0;     /* 아래쪽 선택지와의 간격 */    
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0,0,0,0.02);
-
-    /* 텍스트 스타일 */
     font-size: 1.5rem;
     font-weight: 700;
     color: #1f2937;
     line-height: 1.5;
-    word-break: keep-all;   /* 한글 줄바꿈 최적화 */
+    word-break: keep-all;   
 }
 
-/* 퀴즈 질문 내부 텍스트(p태그) 마진 초기화 */
 #quiz-question-text {
     margin: 0;
     font-size: inherit;
@@ -338,26 +303,25 @@ svg { z-index: 0; }
     width: 100%;
     padding: 18px 24px;
     font-size: 1.1rem;
-    color: #4b5563;         /* 부드러운 회색 텍스트 */
-    background: #ffffff;    /* 흰색 배경 */
+    color: #4b5563;        
+    background: #ffffff;    
     
-    /* 테두리와 모서리 */
     border: 2px solid #e5e7eb; 
-    border-radius: 16px;    /* 버튼 모서리 */
+    border-radius: 16px;    
     
     cursor: pointer;
     transition: all 0.2s ease;
-    text-align: left;       /* 왼쪽 정렬 */
+    text-align: left;     
     font-weight: 500;
     margin-top: 0;
     line-height: 1.4;
     
-    /* 기존 그라데이션 제거 */
+    
     background-image: none; 
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-/* 선택지 마우스 올렸을 때 (Hover) */
+
 #choices-container button:hover,
 #quiz-choices-container button:hover {
     background-color: #f9fafb; /* 아주 연한 보라빛 회색 */
