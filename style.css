@@ -239,11 +239,6 @@ button:hover {
     }
 }
 
-
-#back-btn {
-    background-color: #a0c4ff; /* 흐린 하늘색 */
-}
-
 #back-btn:hover {
     background-color: #8da0cb; /* 마우스를 올렸을 때 조금 더 진한 색 */
 }
