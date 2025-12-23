@@ -22,12 +22,6 @@ body {
     min-height: 100vh;
 }
 
-#result-text {
-    font-size: 1.2rem; /* 글자 크기 (1rem이 기본 크기) */
-    line-height: 1.5;  /* 줄 간격 */
-    margin-bottom: 1rem; /* 아래쪽 여백 */
-}
-
 /* --- 페이지별 레이아웃 설정 --- */
 #survey-page, #result-page, #quiz-page, #explanation-page {
     display: flex;
@@ -570,12 +564,17 @@ svg { z-index: 0; }
     padding-bottom: 15px;
     border-bottom: 2px dashed #eee; /* 하단 점선 구분선 */
 }
+    /* 설문결과 텍스트 */
+#result-text {    
+    font-size: 1.2rem;       
+    line-height: 1.6;        
+    color: #333;    
+    word-break: keep-all;   
+    white-space: pre-wrap;   
+    margin-bottom: 20px;     
+    padding: 0 10px;         
+}
 
-.result-text {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: #333;
-    
     /* [수정] 텍스트 정렬 및 줄바꿈 최적화 */
     text-align: center;         /* 중앙 정렬 (선택 사항, 깔끔해 보임) */
     word-break: keep-all;       /* 한글 단어 중간에 끊기지 않도록 설정 (가독성 UP) */
