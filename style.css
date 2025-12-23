@@ -595,7 +595,7 @@ svg { z-index: 0; }
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 10px;
-    border: 1px solid #d7f5e; /* 테두리 살짝 */
+    border: 1px solid #d7f5eb; /* 테두리 살짝 */
     box-shadow: 0 2px 5px rgba(228, 245, 239, 0.1);
 }
 
