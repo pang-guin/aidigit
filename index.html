@@ -1,99 +1,209 @@
 <!DOCTYPE html>
+
 <html lang="ko">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>✨ 나의 AI 육각형 테스트 ✨</title>
+
     <link rel="stylesheet" href="style.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
+
 <body>
 
+
+
     <div id="intro-page">
+
         <div class="chart-container">
+
             <svg viewBox="0 0 200 200">
+
                 <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
+
                 <polygon class="hexagon" points="100,31 160,65 160,135 100,169 40,135 40,65"/><circle class="sparkle" cx="160" cy="40" r="5"/><circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/><circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+
             </svg>
+
             <canvas id="introRadarChart"></canvas>
+
         </div>
+
+
 
         <h2>✨ 나의 AI 육각형 테스트 ✨</h2>
+
         <button id="start-btn">시작하기</button>
+
         <p>매일 AI와 함께하는 지금!<br>
+
            나를 위한 AI 사용법을 찾아<br>
+
            AI를 창의적이고 안전하게 사용하는<br> '육각형 인간'이 되어보자!</p>
+
         
+
     </div>
+
+
 
     <div id="survey-page" style="display:none;">
+
         <div id="survey-progress-container">
+
         <div id="survey-progress-bar"></div></div>
+
         <h2 id="question-text"></h2>
+
         <div id="choices-container"></div>
+
        <button id="back-btn" style="display:none;">이전 질문</button>
+
     </div>
 
-    <div id="result-page" style="display:none;">
-        <h2 id="main-title">🎯나의 AI 능력 분석결과</h2>
-        <div class="chart-container">
+<div id="loading-page" style="display:none;">
+        <div class="loading-hexagon">
             <svg viewBox="0 0 200 200">
-                <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
-                <polygon class="hexagon" points="100,20 170,60 170,140 100,180 30,140 30,60"/><circle class="sparkle" cx="160" cy="40" r="5"/><circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/><circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+                <defs><linearGradient id="load-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
+                <polygon class="hexagon-shape" points="100,20 170,60 170,140 100,180 30,140 30,60" fill="none" stroke="url(#load-grad)" stroke-width="8"/>
             </svg>
+        </div>
+        <h2 class="loading-text">나의 AI 육각형을<br>만드는 중....</h2>
+    </div>
+
+  
+  
+  
+  
+    <div id="result-page" style="display:none;">
+
+        <h2 id="main-title">🎯나의 AI 능력 분석결과</h2>
+
+        <div class="chart-container">
+
+            <svg viewBox="0 0 200 200">
+
+                <defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #ffb6ff; stop-opacity:1" /><stop offset="100%" style="stop-color: #89f7fe; stop-opacity:1" /></linearGradient></defs>
+
+                <polygon class="hexagon" points="100,20 170,60 170,140 100,180 30,140 30,60"/><circle class="sparkle" cx="160" cy="40" r="5"/><circle class="sparkle" cx="40" cy="160" r="4" style="animation-delay: 0.5s"/><circle class="sparkle" cx="180" cy="100" r="3" style="animation-delay: 1s"/>
+
+            </svg>
+
             <canvas id="resultRadarChart"></canvas>
+
         </div>
+
        <div class="result-box">
+
 <div id="result-title" class="result-title"></div>
+
     <div id="result-text" class="result-message"></div>
+
          </div>         
+
       <div class="mission-section">
+
         <h3>⚡나에게 필요한 에너지 가이드</h3>
+
         <p class="mission-instruction">아래 카드를 눌러 부족한 에너지를 확인해주세요!</p>
+
         
+
         <div class="mission-progress-container">
+
             <div class="mission-label">충전율: <span id="mission-progress-text">0/4</span></div>
+
             <div class="mission-track">
+
                 <div id="mission-progress-fill" class="mission-fill"></div>
+
             </div>
+
         </div>
+
+
 
         <div id="mission-cards-grid" class="cards-grid"></div>
 
+
+
         <button id="mission-complete-btn" class="complete-button" disabled>에너지를 모두 충전해주세요! (0/4)</button>
+
     </div>
+
     
+
      </div>
 
+
+
   <div id="quiz-page" style="display:none;">
+
         <h2>실전! 능력 강화 퀴즈</h2>
+
               <p>주어진 문장을 올바르게 완성하는 선택지를 골라보세요.</p>
 
+
+
             <div id="progress-bar-container">
+
             <div id="progress-bar"></div>
+
             </div>
+
       
+
             <div id="quiz-question-container">
+
                 <p id="quiz-question-text"></p>
+
             </div>
+
        
+
             <div id="quiz-choices-container" ></div>
+
            <button id="complete-quiz-btn" style="display:none;">결과 보기</button>
+
     </div>
+
              
+
   <div id="explanation-page" style="display:none;">
+
         <h2>정답 해설</h2>
+
         <p id="explanation-text" style="text-align: left; background-color: white; padding: 1.5rem; border-radius: 10px;"></p>
+
         <button id="next-quiz-btn">다음 문제로</button>
+
     </div>
+
   
+
     <div id="final-page" style="display:none;">
+
         <div id="sparkling-hexagon">✨</div>
+
         <h2>🎉축하합니다!🎉</h2>
+
         <p>당신은 'AI 마스터 육각형 인간'으로 거듭났습니다!</p>
+
     </div>
+
     
+
     <script src="script.js"></script>
+
   
+
 </body>
+
 </html>
